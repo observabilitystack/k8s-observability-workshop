@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  roles:
+    - o12stack
+
+- hosts: minikube
+  become: true
+  roles:
+  
+    - minikube

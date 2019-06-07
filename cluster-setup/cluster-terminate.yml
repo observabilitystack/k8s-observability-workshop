@@ -1,0 +1,12 @@
+---
+- hosts: minikube
+  gather_facts: true
+  tasks: 
+
+    - ec2_metadata_facts:
+
+      # create minikube instance
+    - ec2_instance:
+        instance_ids: "{{ ansible_ec2_instance_id }}"
+        state: absent
+      delegate_to: localhost
