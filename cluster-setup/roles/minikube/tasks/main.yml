@@ -29,3 +29,11 @@
     dest: /usr/local/bin/minikube
     mode: 0755
     url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+# next
+# minikube start --vm-driver=none
+# /usr/local/bin/minikube start --vm-driver=none
+# /usr/local/bin/minikube addons enable ingress
+# /usr/local/bin/minikube addons enable metrics-server
+#
+# DONE!
