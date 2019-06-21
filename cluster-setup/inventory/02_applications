@@ -3,6 +3,3 @@
 [minikube:children]
 tag_application_minikube
   
-
-# empty groups
-[tag_application_minikube]

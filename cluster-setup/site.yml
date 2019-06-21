@@ -2,10 +2,10 @@
 - hosts: all
   become: true
   roles:
-    - o12stack
+    - base-os
+#    - firewall
 
 - hosts: minikube
   become: true
   roles:
-  
     - minikube

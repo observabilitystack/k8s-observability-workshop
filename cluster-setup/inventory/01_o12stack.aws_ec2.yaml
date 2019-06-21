@@ -1,9 +1,0 @@
-plugin: aws_ec2
-boto_profile: default
-regions:
-  - eu-central-1
-keyed_groups:
-  - prefix: tag
-    key: tags
-    value:
-      "application": "environment"

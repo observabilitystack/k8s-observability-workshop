@@ -1,0 +1,15 @@
+---
+- name: Enable epel repo
+  yum:
+    name: epel-release
+
+- name: Install default packages
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - joe
+    - vim
+    - emacs
+    - wget
+

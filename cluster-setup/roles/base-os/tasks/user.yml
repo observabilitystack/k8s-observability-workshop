@@ -1,0 +1,10 @@
+- name: Add a workshop group
+  group:
+    name: somegroup
+    gid: "1000"
+
+- name: Add workshop user
+  user:
+    name: workshop
+    comment: A workshop user
+    uid: "1000"
