@@ -1,6 +1,3 @@
-# Set the variable value in *.tfvars file
-# or using -var="hcloud_token=..." CLI option
-variable "HCLOUD_TOKEN" {}
 
 variable "instance_count" {
   default = "1"
@@ -9,8 +6,12 @@ variable "instance_count" {
 # Configure the Hetzner Cloud Provider using
 # a token from our enviornment
 provider "hcloud" {
-  token = "${var.HCLOUD_TOKEN}"
   version = "~> 1.10"
+}
+
+# We use Digital Ocean for DNS
+provider "digitalocean" {
+  version = "~> 1.4"
 }
 
 # This is the root key we use to access and provison
@@ -21,11 +22,22 @@ resource "hcloud_ssh_key" "default" {
   public_key = "${file("~/.ssh/hetzner-o12stack.id_rsa.pub")}"
 }
 
+# We use random pet names to name each workshop
+# server: numbers are boooooring
+resource "random_pet" "server" {}
+
 # This creates the workshop servers
 resource "hcloud_server" "workshop" {
   count       = "${var.instance_count}"
-  name        = "workshop-${count.index}"
+  name        = "${random_pet.server.id}"
   image       = "centos-7"
   server_type = "cx11"
   ssh_keys    = ["${hcloud_ssh_key.default.name}"]
+}
+
+resource "digitalocean_record" "www" {
+  domain = "k8s.o12stack.org"
+  type   = "A"
+  name   = "${hcloud_server.workshop.name}"
+  value  = "${hcloud_server.workshop.ipv4_address}"
 }
