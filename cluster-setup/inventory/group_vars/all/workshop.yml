@@ -1,0 +1,12 @@
+---
+# ---------------------------------------------------------------------
+# workshop participant settings
+# ---------------------------------------------------------------------
+workshop:
+  participants:
+    - name: alice
+      domain: "" # n-th server from list
+      ssh: ""
+    - name: bob
+    - name: charlie
+

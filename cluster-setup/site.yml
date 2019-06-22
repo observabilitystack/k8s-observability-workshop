@@ -5,7 +5,7 @@
     - base-os
 #    - firewall
 
-- hosts: minikube
+- hosts: workshop
   become: true
   roles:
     - minikube

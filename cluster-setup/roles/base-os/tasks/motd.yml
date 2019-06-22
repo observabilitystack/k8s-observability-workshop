@@ -1,0 +1,20 @@
+---
+- name: copy motd image
+  copy:
+    src: "{{ item }}"
+    dest: /etc/motd.image
+  with_random_choice: "{{ lookup('fileglob', 'files/streetfighters/*.txt', wantlist=True) }}"
+  tags:
+    - motd
+
+- name: template motd facts
+  template:
+    src: motd.j2
+    dest: /etc/motd.facts
+  tags:
+    - motd
+
+- name: compose final motd message
+  shell: "paste /etc/motd.image /etc/motd.facts > /etc/motd"
+  tags:
+    - motd

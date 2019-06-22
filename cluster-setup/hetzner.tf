@@ -14,6 +14,12 @@ provider "digitalocean" {
   version = "~> 1.4"
 }
 
+# we use the random provider to assign
+# random hostnames
+provider "random" {
+  version = "~> 2.1"
+}
+
 # This is the root key we use to access and provison
 # servers at the hetzner provider. If not present, it
 # will be created under the given name
