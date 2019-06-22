@@ -7,6 +7,8 @@ This folder holds resources to set up a workshop cluster where
 * All infrastructure is set up (and destroyed) using Terraform
 * All servers are provisioned using Ansible
 
+![alt](docs/workshop-login.png)
+
 ## Accounts and Tokens needed
 
 * Hetzner
