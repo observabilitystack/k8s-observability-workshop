@@ -28,3 +28,11 @@
   loop:
     - { home: '/root', user: 'root', group: 'root' }
     - { home: '/home/workshop', user: 'workshop', group: 'workshop' }
+
+- name: create payload directory
+  file:
+    name: "/www"
+    state: directory
+    owner: workshop
+    group: workshop
+    mode: 0755
