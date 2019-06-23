@@ -1,0 +1,23 @@
+---
+- name: install package
+  yum:
+    name: sudo
+    state: present
+
+- name: configure sudo user
+  template:
+    src: sudo-workshop.j2
+    dest: "/etc/sudoers.d/workshop"
+    owner: root
+    group: root
+    mode: 0440
+    validate: 'visudo -cf %s'
+
+- name: configure sudoers
+  copy:
+    src: sudoers
+    dest: /etc/sudoers
+    owner: root
+    group: root
+    mode: 0440
+    validate: 'visudo -cf %s'

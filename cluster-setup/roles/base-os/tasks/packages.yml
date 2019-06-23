@@ -12,4 +12,31 @@
     - vim
     - emacs
     - wget
+    - git
+    - zip
+    - unzip
+    - lsof
+    - telnet
+    - strace
+    - vim-enhanced
+    - tcpdump
+    - nc
+    - screen
+    - htop
+    - iotop
+    - sl
+    - bind-utils
+    - python-httplib2
+    - pv
+    - dos2unix
+    - sysstat
+    - psmisc
+    - yum-utils
+    - yum-plugin-priorities
+    - jq
+    - ncdu
+    - bash-completion
+    - bridge-utils
+    - iperf
+    - moreutils
 

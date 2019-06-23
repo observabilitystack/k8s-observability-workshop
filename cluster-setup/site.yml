@@ -3,9 +3,9 @@
   become: true
   roles:
     - base-os
-#    - firewall
+    - firewall
 
-- hosts: workshop
-  become: true
-  roles:
-    - minikube
+#- hosts: workshop
+#  become: true
+#  roles:
+#    - minikube

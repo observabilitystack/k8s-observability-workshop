@@ -1,0 +1,53 @@
+---
+- name: install the iptables package
+  package:
+    name: iptables
+    state: latest
+
+- name: flush existing firewall rules
+  iptables:
+    flush: true
+  tags:
+    - iptables
+
+- name: allow all loopback traffic
+  iptables:
+    action: append
+    chain: INPUT
+    in_interface: lo
+    jump: ACCEPT
+  tags:
+    - iptables
+
+- name: allow established connections
+  iptables:
+    chain: INPUT
+    ctstate: ESTABLISHED,RELATED
+    jump: ACCEPT
+  tags:
+    - iptables
+
+- name: allow port ping traffic
+  iptables:
+    chain: INPUT
+    jump: ACCEPT
+    protocol: icmp
+  tags:
+    - iptables
+
+- name: allow port specific traffic
+  iptables:
+    chain: INPUT
+    destination_port: "{{ item | string }}"
+    jump: ACCEPT
+    protocol: tcp
+  loop: "{{ firewall.ports }}"
+  tags:
+    - iptables
+
+- name: drop any traffic without rule
+  iptables:
+    chain: INPUT
+    jump: DROP
+  tags:
+    - iptables

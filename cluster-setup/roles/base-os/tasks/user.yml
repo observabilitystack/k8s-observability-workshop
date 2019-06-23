@@ -1,6 +1,6 @@
 - name: Add a workshop group
   group:
-    name: somegroup
+    name: workshop
     gid: "1000"
 
 - name: Add workshop user
@@ -8,5 +8,23 @@
     name: workshop
     comment: A workshop user
     uid: "1000"
+    group: "workshop"
 
-# TODO ssh keys
+- name: Place ssh keys for user workshop
+  authorized_key:
+    user: workshop
+    state: present
+    key: "{{ item.ssh_key }}"
+    key_options: 'environment="REMOTE_USER={{ item.name }}"'
+  loop: "{{ workshop.trainers | union(workshop.participants) }}"
+
+- name: install sane bashrc for all users
+  copy:
+    src: bashrc
+    dest: "{{ item.home }}/.bashrc"
+    owner: "{{ item.user }}"
+    group: "{{ item.group }}"
+    mode: 0644
+  loop:
+    - { home: '/root', user: 'root', group: 'root' }
+    - { home: '/home/workshop', user: 'workshop', group: 'workshop' }

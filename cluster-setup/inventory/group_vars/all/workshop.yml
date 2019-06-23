@@ -3,10 +3,15 @@
 # workshop participant settings
 # ---------------------------------------------------------------------
 workshop:
+  trainers:
+    - name: "Torsten Köster"
+      ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCNG8wjkgwVJIx0JQfnmGv4cKxhlIkOswd+8BTEXStnQwuGEbhQmRlU7dZDQ2wmeNnOBEnylI9875mHdvOlgk/lZD4R9QS/+zpFXm/iQLrgBMYpaQ3Y6JjBvUft9FzFpvl2tglY5eC5li2aQsk2j+HujhPaaoo6xKk4NZoFHgF1KQ=="
+    - name: "Nikolaus Winter"
+      ssh_key: ""
   participants:
     - name: alice
       domain: "" # n-th server from list
-      ssh: ""
-    - name: bob
-    - name: charlie
+      ssh_key: ""
+#    - name: bob
+#    - name: charlie
 
