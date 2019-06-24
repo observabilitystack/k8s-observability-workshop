@@ -39,4 +39,5 @@
     - bridge-utils
     - iperf
     - moreutils
+    - python-pip
 

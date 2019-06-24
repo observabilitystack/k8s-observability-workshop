@@ -1,0 +1,29 @@
+---
+- name: create k8s component target directory
+  file:
+    name: "/www/k8s-components"
+    state: directory
+    owner: workshop
+    group: workshop
+
+- name: copy cluster component definitions
+  copy:
+    src: "{{ item }}"
+    dest: "/www/k8s-components/{{ item }}"
+  loop:
+    - traefik-rbac.yaml
+    - traefik-ds.yaml
+  tags:
+    - k8s
+
+- name: template cluster component definitions
+  template:
+    src: "{{ item }}.j2"
+    dest: "/www/k8s-components/{{ item }}"
+  loop:
+    - traefik-ui.yaml
+  tags:
+    - k8s
+
+#- name: apply cluster components
+#  shell: ""
