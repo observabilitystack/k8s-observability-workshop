@@ -1,2 +1,3 @@
 cluster-setup/*.tfstate*
 cluster-setup/.terraform*
+cluster-setup/roles/tls/files/*.pem
