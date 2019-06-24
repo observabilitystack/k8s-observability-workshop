@@ -1,0 +1,5 @@
+---
+- name: place tls wildcard cert
+  copy:
+    src: "{{ ansible_host }}.pem"
+    dest: "/etc/certficates/{{ ansible_host }}.pem"

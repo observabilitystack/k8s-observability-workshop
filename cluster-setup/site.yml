@@ -2,12 +2,13 @@
 # prepares the host for general access, configures firewall,
 # general utility packages and installs docker. The workshop
 # user is created and ssh keys are put in place.
-#- hosts: all
-#  become: true
-#  roles:
-#    - base-os
-#    - firewall
-#    - docker
+- hosts: all
+  become: true
+  roles:
+    - base-os
+    - firewall
+    - docker
+    - tls
 
 # This provisions workshop specific software to the hosts
 - hosts: workshop
