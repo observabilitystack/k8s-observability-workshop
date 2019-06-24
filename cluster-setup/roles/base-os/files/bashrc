@@ -12,3 +12,5 @@ alias rm='rm -i'
 
 alias df='df -h'
 alias ll='ls -l'
+
+# Custom additions

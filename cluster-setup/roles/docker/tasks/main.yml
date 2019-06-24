@@ -24,3 +24,15 @@
   file:
     name: /usr/local/bin/docker-compose
     mode: 0755
+
+- name: Add user workshop to group docker
+  user:
+    name: workshop
+    append: yes
+    groups: docker
+
+- name: start Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
