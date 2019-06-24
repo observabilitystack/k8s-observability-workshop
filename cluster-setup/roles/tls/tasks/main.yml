@@ -1,5 +1,10 @@
 ---
+- name: create target directories
+  file:
+    name: /etc/certficates
+    state: directory
+
 - name: place tls wildcard cert
   copy:
-    src: "{{ ansible_host }}.pem"
-    dest: "/etc/certficates/{{ ansible_host }}.pem"
+    src: "{{ inventory_hostname }}.{{ workshop_domain }}.pem"
+    dest: "/etc/certficates/{{ inventory_hostname }}.{{ workshop_domain }}.pem"
