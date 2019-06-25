@@ -29,5 +29,5 @@
 
 - name: install k8s module requirements
   pip:
-    name: openshifts
+    name: openshift
     extra_args: --ignore-installed
