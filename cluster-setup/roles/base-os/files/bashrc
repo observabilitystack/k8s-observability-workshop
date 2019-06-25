@@ -5,6 +5,9 @@ if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
+# expand path
+export PATH=/usr/local/bin:${PATH}
+
 # User specific aliases and functions
 alias cp='cp -i'
 alias mv='mv -i'
