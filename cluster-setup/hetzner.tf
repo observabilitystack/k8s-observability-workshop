@@ -55,7 +55,7 @@ resource "hcloud_server" "workshop" {
   count       = "${var.instance_count}"
   name        = "${random_pet.server.id}"
   image       = "centos-7"
-  server_type = "cx11"
+  server_type = "cx41"   # 4cpu
   ssh_keys    = ["${hcloud_ssh_key.default.name}"]
 }
 
