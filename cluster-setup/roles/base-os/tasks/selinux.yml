@@ -2,3 +2,8 @@
 - name: Disable selinux
   selinux:
     state: disabled
+  register: selinux
+
+- name: reboot to disable selinux
+  reboot:
+  when: selinux.changed
