@@ -52,10 +52,18 @@ Now start provisioning the servers:
 ansible-playbook site.yml
 ```
 
+### Workshop day
+
+Assign each participant an individual server. Keys are distributed to all machines, so participants could switch (or share) servers. This will list all available hosts:
+
+    ansible workshop --list-hosts
+
+If you have some late arrivals, adjust the server count in the _Terraform_ file and re-run the steps above. Only the one additional server will be created and provisioned.
+
 ### The day after the workshop
 
 Shut down the whole infrastructure using _Terraform_:
 
 ```
-tf destroy
+terraform destroy
 ```
