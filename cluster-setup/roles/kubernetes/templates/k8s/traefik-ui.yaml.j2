@@ -19,10 +19,12 @@ metadata:
   namespace: kube-system
 spec:
   rules:
-  - host: "{{ inventory_hostname }}.{{ workshop_domain }}"
+  - host: "traefik.{{ inventory_hostname }}.{{ workshop_domain }}"
     http:
       paths:
       - path: /
         backend:
           serviceName: traefik-web-ui
           servicePort: web
+  tls:
+   - secretName: {{ inventory_hostname }}.{{ workshop_domain }}-tls

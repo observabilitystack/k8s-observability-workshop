@@ -1,8 +1,23 @@
 ---
+- name: configure TLS secrets
+  become_user: workshop
+  shell: |
+    kubectl -n {{ item }} \
+    create secret tls \
+    {{ inventory_hostname }}.{{ workshop_domain }}-tls \
+    --key /etc/certficates/{{ inventory_hostname }}.{{ workshop_domain }}.pem \
+    --cert /etc/certficates/{{ inventory_hostname }}.{{ workshop_domain }}.pem \
+    --dry-run -o yaml | kubectl apply -f -
+  loop:
+    - default
+    - kube-system
+  tags:
+    - now
+
 - name: configure Traefik ingress
   become_user: workshop
   k8s:
-    src: "{{ lookup(item.type, 'k8s/' + item.name) }}"
+    definition: "{{ lookup(item.type, 'k8s/' + item.name) }}"
   loop:
     - name: "traefik-rbac.yaml"
       type: "file"
