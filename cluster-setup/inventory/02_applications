@@ -1,5 +1,0 @@
-# Reassign ec2 groups to human readable ones
-
-[minikube:children]
-tag_application_minikube
-  

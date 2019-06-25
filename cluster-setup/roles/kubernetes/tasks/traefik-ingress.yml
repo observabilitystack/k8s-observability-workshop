@@ -1,0 +1,15 @@
+---
+- name: configure Traefik ingress
+  become_user: workshop
+  k8s:
+    src: "{{ lookup(item.type, 'k8s/' + item.name) }}"
+  loop:
+    - name: "traefik-rbac.yaml"
+      type: "file"
+    - name: "traefik-ds.yaml"
+      type: "file"
+    - name: "traefik-ui.yaml.j2"
+      type: "template"
+  tags:
+    - now
+

@@ -2,17 +2,15 @@
 # prepares the host for general access, configures firewall,
 # general utility packages and installs docker. The workshop
 # user is created and ssh keys are put in place.
-#- hosts: all
-#  roles:
-#    - base-os
-#    - firewall
-#    - docker
-#    - tls
+- hosts: all
+  roles:
+    - base-os
+    - firewall
+    - docker
+    - tls
 
 # This provisions workshop specific software to the hosts
 - hosts: workshop
-  become: true
-  become_user: workshop
   roles:
-#    - kubernetes-kind
-    - kubernetes-configuration
+    - kubernetes
+#    - kubernetes-configuration

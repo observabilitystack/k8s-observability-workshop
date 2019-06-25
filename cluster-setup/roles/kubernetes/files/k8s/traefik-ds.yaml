@@ -32,7 +32,6 @@ spec:
           containerPort: 443
           hostPort: 443
         securityContext:
-          privileged: true
           capabilities:
             drop:
             - ALL

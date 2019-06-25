@@ -1,24 +1,13 @@
 ---
 - name: install kind
-  become: true
   get_url:
     dest: /usr/local/bin/kind
     mode: 0755
     url: https://github.com/kubernetes-sigs/kind/releases/download/v0.3.0/kind-linux-amd64
 
-- name: Place Kubernetes repo file
-  become: true
-  copy:
-    src: kubernetes.repo
-    dest: /etc/yum.repos.d/kubernetes.repo
-
-- name: Install kubectl
-  become: true
-  yum:
-    name: kubectl
-
 - name: create cluster
-  shell: kind create cluster
+  become_user: workshop
+  shell: /usr/local/bin/kind create cluster
   args:
     creates: /home/workshop/.kube/kind-config-kind
 
