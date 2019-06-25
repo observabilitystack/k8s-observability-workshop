@@ -1,14 +1,20 @@
 # Workshop cluster setup
 
 This folder holds resources to set up a general workshop 
-cluster where
+cluster where:
 
-* Each participant can work on it's own server
-* The participants can edit the relevant workshop files transparently via SSH/VSCode
-* technically, all infrastructure is set up (and destroyed) using Terraform
-* All servers are provisioned using Ansible
+* Each participant works on it's own server
+* The participants edit the relevant workshop files transparently via _SSH/VSCode_ or on the server using _vim/emacs/joe_
 
 ![alt](docs/workshop-login.png)
+
+Technically, each workshop cluster node:
+
+* is set up (and destroyed) using Terraform
+* can be located at any cloud provider Terraform supports (_Hetzner/Digital Ocean/AWS/Azure_ ...)
+* is provisioned using _Ansible_
+* Each server get's assigned an individual pet name (e.g. `upright-sunbird`)
+* Each server gets provisioned a wildcard TLS certficate to ensure secure HTTP communication
 
 ## Setting up the cluster
 
@@ -28,16 +34,25 @@ brew install terraform@0.11 ansible terraform-inventory figlet
 brew link terraform@0.11 --force
 ```
 
-> We need to stick to Terraform 0.11 until this PR is merged in [terraform-inventory](https://github.com/adammck/terraform-inventory/pull/114)!
+> ⚠️ We need to stick to Terraform 0.11 until [this PR is merged in terraform-inventory](https://github.com/adammck/terraform-inventory/pull/114)!
+
+Set up the server and certificate infrastructure:
 
 ```
-tf init
-tf plan
-tf apply
+terraform init
+terraform plan
+terraform apply
+```
+
+Now start provisioning the servers:
+
+```
 ansible-playbook site.yml
 ```
 
 ### The day after the workshop
+
+Shut down the whole infrastructure using _Terraform_:
 
 ```
 tf destroy
