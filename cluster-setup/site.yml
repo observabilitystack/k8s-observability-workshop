@@ -5,7 +5,9 @@
 - hosts: all
   roles:
     - base-os
-    - firewall
+# we need to disable the firewall until
+# k8s is back in the game :-/
+#    - firewall
     - docker
     - tls
 
@@ -13,4 +15,3 @@
 - hosts: workshop
   roles:
     - kubernetes
-#    - kubernetes-configuration
