@@ -16,6 +16,8 @@ Technically, each workshop cluster node:
 * Each server get's assigned an individual pet name (e.g. `upright-sunbird`)
 * Each server gets provisioned a wildcard TLS certficate to ensure secure HTTP communication
 
+![alt](docs/traefik-tls.png)
+
 ## Setting up the cluster
 
 ### Weeks before the workshop
