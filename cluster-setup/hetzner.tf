@@ -103,5 +103,5 @@ resource "acme_certificate" "certificate" {
 # write TLS certs into Ansible
 resource "local_file" "certificates" {
     content     = "${acme_certificate.certificate.certificate_pem}${acme_certificate.certificate.issuer_pem}${acme_certificate.certificate.private_key_pem}"
-    filename = "./roles/tls/files/${hcloud_server.workshop.name}.k8s.o12stack.org.pem"
+    filename = "./roles/boostrap/tls/files/${hcloud_server.workshop.name}.k8s.o12stack.org.pem"
 }

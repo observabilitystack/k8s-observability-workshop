@@ -1,8 +1,0 @@
-{{ lookup('pipe','figlet ' + inventory_hostname)  }}
-
- FQDN:  {{ inventory_hostname }}.{{ workshop_domain }}
- IP:    {{ ansible_default_ipv4.address }} // {{ ansible_default_ipv6.address }}
- CPU:   {{ ansible_processor_vcpus }} x {{ ansible_processor[2] }}
- RAM:   {{ (ansible_memtotal_mb/1024) | round(2) }}GB
- OS:    {{ ansible_distribution }} {{ ansible_distribution_version }}
- Cloud: {{ server_type }}@{{ datacenter }}
