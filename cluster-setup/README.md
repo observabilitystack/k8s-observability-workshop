@@ -13,7 +13,7 @@ cluster. Upon setup participants
 
 ## Documentation
 
-* [Technical foundatations](docs/technical_foundationss.md)
+* [Technical foundatations](docs/technical_foundations.md)
 * [Customizing the Cluster for your workshop](docs/customizing_for_your_workshop.md)
 * [Setting up the Cluster](docs/setting_up_the_cluster.md)
 
