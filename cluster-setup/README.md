@@ -3,7 +3,7 @@
 This repository holds resources to set up a general workshop 
 cluster. Letting workshop participants work on unified and equally
 powerful servers without any in-workshop software installment hassle
-is the goal of this project. Configuring services on the server on
+is the goal of this project. For the participants, configuring services on the server on
 the other hand should be as transparent as possible.
 
 Upon setup, participants
