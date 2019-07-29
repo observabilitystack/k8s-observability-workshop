@@ -1,5 +1,6 @@
 ---
 - name: configure TLS secrets
+  become: true
   become_user: workshop
   shell: |
     kubectl -n {{ item }} \
@@ -11,10 +12,9 @@
   loop:
     - default
     - kube-system
-  tags:
-    - now
 
 - name: configure Traefik ingress
+  become: true
   become_user: workshop
   k8s:
     definition: "{{ lookup(item.type, 'k8s/' + item.name) }}"

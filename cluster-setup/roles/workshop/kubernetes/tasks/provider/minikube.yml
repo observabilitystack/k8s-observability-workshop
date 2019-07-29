@@ -33,6 +33,7 @@
     replace: '/home/workshop/.minikube/'
 
 - name: enable minikube addons
+  become: true
   become_user: workshop
   shell: "/usr/local/bin/minikube addons enable {{ item }}"
   args:
