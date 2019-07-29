@@ -1,8 +1,8 @@
 {{ lookup('pipe','figlet ' + inventory_hostname)  }}
 
- 🏠 {{ inventory_hostname }}.{{ workshop_domain }}
- ☎️ {{ ansible_default_ipv4.address }} // {{ ansible_default_ipv6.address }}
- 🖥️ {{ ansible_processor_vcpus }} x {{ ansible_processor[2] }}
- 🗜️ {{ (ansible_memtotal_mb/1024) | round(2) }}GB
- 💾 {{ ansible_distribution }} {{ ansible_distribution_version }}
- ☁️ {{ server_type }}@{{ datacenter }}
+ 🏠  {{ inventory_hostname }}.{{ workshop_domain }}
+ ☎️   {{ ansible_default_ipv4.address }} // {{ ansible_default_ipv6.address }}
+ 🖥️   {{ ansible_processor_vcpus }} x {{ ansible_processor[2] }}
+ 🗜️   {{ (ansible_memtotal_mb/1024) | round(2) }}GB
+ 💾  {{ ansible_distribution }} {{ ansible_distribution_version }}
+ ☁️   {{ server_type }}@{{ datacenter }}
