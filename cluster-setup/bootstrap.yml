@@ -5,8 +5,6 @@
 - hosts: all
   roles:
     - base-os
-# we need to disable the firewall until
-# k8s is back in the game :-/
-#    - firewall
+    - firewall
     - docker
     - tls

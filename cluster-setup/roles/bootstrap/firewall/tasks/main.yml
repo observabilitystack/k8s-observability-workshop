@@ -1,53 +1,47 @@
 ---
-- name: install the iptables package
+- name: install firewalld
   package:
-    name: iptables
+    name: firewalld
     state: latest
 
-- name: flush existing firewall rules
-  iptables:
-    flush: true
-  tags:
-    - iptables
+- name: place Kubernetes firewalld configuration
+  copy:
+    src: kubernetes.xml
+    dest: /usr/lib/firewalld/services/kubernetes.xml
 
-- name: allow all loopback traffic
-  iptables:
-    action: append
-    chain: INPUT
-    in_interface: lo
-    jump: ACCEPT
-  tags:
-    - iptables
+- name: enable and start firewalld
+  service:
+    name: firewalld
+    state: started
+    enabled: true
 
-- name: allow established connections
-  iptables:
-    chain: INPUT
-    ctstate: ESTABLISHED,RELATED
-    jump: ACCEPT
-  tags:
-    - iptables
+- name: configure public firewall services
+  firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - https
+    - http
+    - ssh
 
-- name: allow port ping traffic
-  iptables:
-    chain: INPUT
-    jump: ACCEPT
-    protocol: icmp
-  tags:
-    - iptables
+- name: create workshop zone
+  firewalld:
+    zone: workshop
+    state: present
+    permanent: yes
 
-- name: allow port specific traffic
-  iptables:
-    chain: INPUT
-    destination_port: "{{ item | string }}"
-    jump: ACCEPT
-    protocol: tcp
-  loop: "{{ firewall.ports }}"
-  tags:
-    - iptables
+- name: allow access to workshop zone from current ip
+  firewalld:
+    source: 79.202.107.172/32
+    zone: workshop
+    state: enabled
+    permanent: yes
 
-- name: drop any traffic without rule
-  iptables:
-    chain: INPUT
-    jump: DROP
-  tags:
-    - iptables
+- name: configure workshop firewall services
+  firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - kubernetes

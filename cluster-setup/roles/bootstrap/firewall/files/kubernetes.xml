@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>Kubernetes</short>
+  <description>Kubernetes container scheduler</description>
+  <port protocol="tcp" port="6443"/>
+  <port protocol="tcp" port="2379-2380"/>
+  <port protocol="tcp" port="10250-10255"/>
+</service>
