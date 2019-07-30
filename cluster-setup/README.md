@@ -24,3 +24,23 @@ Upon setup, participants
 * [Customizing the Cluster for your workshop](docs/customizing_for_your_workshop.md)
 * [Setting up the Cluster](docs/setting_up_the_cluster.md)
 
+## Connecting to the server using VSCode
+
+To connect to your Kubernetes training cluster, we recommend using Visual 
+Studio Code and the remote SSH plugin. Hit `F1` and start typing 
+`Remote SSH`. Select `Remote SSH: Connect to Host ...`
+
+![alt](docs/vscode_remote_ssh.png)
+
+During the workshop, you connect as the SSH user `workshop`. Connect
+to your assigned server, e.g. `workshop@opawaited-asp.k8s.o12stack.org`. 
+
+![alt](docs/vscode_remote_ssh_server.png)
+
+VSCode opens a remote SSH shell for your convenience. Click `Open a folder`
+and select `/home/workshop/observability-workshop` to gain access to the
+workshops resources.
+
+![alt](docs/vscode_open_remote_folder.png)
+
+

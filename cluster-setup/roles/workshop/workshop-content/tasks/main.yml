@@ -1,0 +1,5 @@
+---
+- name: clone workshop contents into user directory
+  git:
+    repo: https://github.com/observabilitystack/k8s-observability-workshop.git
+    dest: /home/workshop/observability-workshop

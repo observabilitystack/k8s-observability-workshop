@@ -1,4 +1,12 @@
-# Observability Workshop W-JAX 2019
+# Observability Workshop W-JAX 2019 // DevOpsCon 2019
 
 These are the resources for the observability workshop we held
-at the W-JAX 2019. This is heavy work in progress ...
+at W-JAX and DevOpsCon 2019
+
+## Testing things locally
+
+````
+minikube start --vm-driver=hyperkit --memory 8192 --cpus 4
+minikube addons enable metrics-server
+minikube addons enable ingress
+````
