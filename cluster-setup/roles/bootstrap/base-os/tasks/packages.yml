@@ -62,3 +62,9 @@
   file:
     name: /usr/local/bin/bat
     mode: 0755
+
+- name: default shasum to sha256sum
+  file:
+    state: link
+    src: /usr/bin/sha256sum
+    dest: /usr/bin/shasum
