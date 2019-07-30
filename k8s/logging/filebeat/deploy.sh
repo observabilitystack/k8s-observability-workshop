@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export FILEBEAT_VERSION=7.2.0
+export HOSTNAME="${HOSTNAME:=local}"
 
 cd $(dirname "$0")
 set -e
