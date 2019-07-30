@@ -31,12 +31,16 @@
     state: present
     permanent: yes
 
-- name: allow access to workshop zone from current ip
+- name: allow access to workshop zone from current ip (office / host)
   firewalld:
-    source: 79.202.107.172/32
+    source: "{{ item }}"
     zone: workshop
     state: enabled
     permanent: yes
+  loop:
+    - 79.202.107.172/32
+    - "{{ ansible_default_ipv4.address }}/32"
+    - "{{ ansible_default_ipv6.address }}/32"
 
 - name: configure workshop firewall services
   firewalld:
@@ -45,3 +49,13 @@
     state: enabled
   loop:
     - kubernetes
+
+- name: enable masquerade
+  firewalld:
+    masquerade: yes
+    state: enabled
+    permanent: yes
+    zone: "{{ item }}"
+  loop:
+    - workshop
+    - public

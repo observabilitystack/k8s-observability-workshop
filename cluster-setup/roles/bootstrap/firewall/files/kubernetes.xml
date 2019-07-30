@@ -4,5 +4,9 @@
   <description>Kubernetes container scheduler</description>
   <port protocol="tcp" port="6443"/>
   <port protocol="tcp" port="2379-2380"/>
+  <port protocol="tcp" port="8080"/>
+  <port protocol="udp" port="8285"/>
+  <port protocol="udp" port="8472"/>
   <port protocol="tcp" port="10250-10255"/>
+  <port protocol="tcp" port="30000-32767"/>
 </service>

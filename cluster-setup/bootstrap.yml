@@ -5,6 +5,6 @@
 - hosts: all
   roles:
     - base-os
-    - firewall
+#    - firewall
     - docker
     - tls
