@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: elasticsearch
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: elasticsearch
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9108"
+    spec:
+      initContainers:
+      - name: "sysctl"
+        image: busybox
+        command: ["sysctl", "-w", "vm.max_map_count=262144"]
+        securityContext:
+          privileged: true
+
+      containers:
+        - name: elasticsearch
+          image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTICSEARCH_VERSION}
+          env:
+            - name: ES_HTTP_CORS_ALLOW-ORIGIN
+              value: "*"
+            - name: discovery.type
+              value: single-node
+            - name: cluster.name
+              value: o12stack
+          ports:
+            - containerPort: 9200
+              name: http
+            - containerPort: 9300
+              name: transport
+          readinessProbe:
+            httpGet:
+              path: /_cluster/health
+              port: 9200
+            initialDelaySeconds: 5
+          livenessProbe:
+           httpGet:
+              path: /_cluster/health?local=true
+              port: 9200
+           initialDelaySeconds: 90
+        - name: elasticsearch-exporter
+          image: justwatch/elasticsearch_exporter:1.0.2
+          args:
+            - "-es.all"
+            - "-es.indices"
+            - "-es.uri=http://localhost:9200"
+        - name: elasticsearch-elastichq
+          image: elastichq/elasticsearch-hq:release-v3.5.0
+          env:
+            - name: HQ_DEFAULT_URL
+              value: http://localhost:9200
+          ports:
+            - containerPort: 5000
+              name: elastichq

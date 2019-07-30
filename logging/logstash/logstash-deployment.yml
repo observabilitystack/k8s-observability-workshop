@@ -1,0 +1,42 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: logstash
+spec:
+  template:
+    metadata:
+      labels:
+        name: logstash
+      annotations:
+        checksum/configuration: ${CONF_SHA}
+    spec:
+      containers:
+      - name: logstash
+        image: docker.elastic.co/logstash/logstash:${LOGSTASH_VERSION}
+        ports:
+        - containerPort: 5044
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+          limits:
+            cpu: "2000m"
+            memory: "4Gi"
+        volumeMounts:
+        - name: logstash-configuration
+          mountPath: /usr/share/logstash/pipeline/logstash.conf
+          readOnly: true
+          subPath: logstash.conf
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9600
+          initialDelaySeconds: 10
+          periodSeconds: 5
+
+      volumes:
+      - name: logstash-configuration
+        configMap:
+          defaultMode: 0644
+          name: logstash-configuration

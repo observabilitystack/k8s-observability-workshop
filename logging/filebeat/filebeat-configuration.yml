@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-configmap
+  labels:
+    app: filebeat
+data:
+  filebeat.yml: |-
+    filebeat.autodiscover:
+      providers:
+        - type: kubernetes
+          hints.enabled: true
+          include_annotations: ['org.o12stack/logs.enable', 'org.o12stack/logs.hint']
+          templates:
+            - condition:
+                and:
+                  - not.has_fields: ['kubernetes.annotations.co.elastic.logs/multiline.pattern', 'kubernetes.annotations.co.elastic.logs/multiline.negate', 'kubernetes.annotations.co.elastic.logs/multiline.match'] 
+              config:
+                - type: docker
+                  containers.ids:
+                    - "${data.kubernetes.container.id}"
+                  multiline:
+                    pattern: '^\[*\d{2,4}'
+                    negate: true
+                    match: after
+            - condition:
+                and:
+                  - has_fields: ['kubernetes.annotations.co.elastic.logs/multiline.pattern', 'kubernetes.annotations.co.elastic.logs/multiline.negate', 'kubernetes.annotations.co.elastic.logs/multiline.match'] 
+              config:
+                - type: docker
+                  containers.ids:
+                    - "${data.kubernetes.container.id}"
+                  multiline:
+                    pattern: "${data.kubernetes.annotations.co.elastic.logs/multiline.pattern}"
+                    negate: "${data.kubernetes.annotations.co.elastic.logs/multiline.negate}"
+                    match: "${data.kubernetes.annotations.co.elastic.logs/multiline.match}"
+    processors:
+    - drop_event:
+        when:
+            equals:
+              kubernetes.annotations.org.o12stack/logs.enable: 'false'
+  
+    output.logstash:
+      hosts: ["logstashs.monitoring:5044"]

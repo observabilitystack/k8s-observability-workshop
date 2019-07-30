@@ -1,0 +1,53 @@
+---
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: filebeat
+spec:
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: filebeat
+      annotations:
+        checksum/configuration: ${CONF_SHA}
+    spec:
+      serviceAccountName: filebeat
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: filebeat
+        image: docker.elastic.co/beats/filebeat-oss:${FILEBEAT_VERSION}
+        args: ["-c", "/etc/filebeat.yml", "-e"]
+        securityContext:
+          runAsUser: 0
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "1Gi"
+          limits:
+            cpu: "250m"
+            memory: "1Gi"
+        volumeMounts:
+        - name: filebeat-configuration
+          mountPath: /etc/filebeat.yml
+          subPath: filebeat.yml
+        - name: data
+          mountPath: /usr/share/filebeat/data
+        - name: containerdir
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+
+      volumes:
+      - name: filebeat-configuration
+        configMap:
+          name: filebeat-configmap
+      - name: containerdir
+        hostPath:
+          path: /var/lib/docker/containers
+        # data folder stores a registry of read status for all files, 
+        # so we don't send everything again on a Filebeat pod restart
+      - name: data
+        hostPath:
+          path: /var/lib/filebeat-data
+          type: DirectoryOrCreate

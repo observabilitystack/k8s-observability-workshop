@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch
+spec:
+  type: ClusterIP
+  ports:
+    - name: elasticsearch
+      port: 9200
+      targetPort: http
+    - name: transport
+      port: 9300
+      targetPort: transport
+    - name: elastichq
+      port: 5000
+      targetPort: elastichq
+  selector:
+    name: elasticsearch

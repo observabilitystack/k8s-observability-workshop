@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-configuration
+data:
+  logstash.conf: |-
+    input {
+      beats {
+        port => 5044
+        tags => [ "input:beats" ]
+      }
+    }
+    
+    filter {
+
+    }
+    
+    output {
+      stdout{ codec => line { format => "Dropping msg from %{source}: %{message}" } }
+    }
