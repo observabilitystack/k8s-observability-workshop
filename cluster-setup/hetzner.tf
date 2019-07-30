@@ -1,6 +1,22 @@
 
+terraform {
+  # we are limited to this version until the terraform-inventory
+  # works with 0.12s
+  required_version = "~> 0.11"
+  
+  # synchronize cluster state across trainers
+  backend "remote" {
+    organization = "o12stack"
+    workspaces {
+      name = "wjax-k8s-workshop"
+    }
+
+    # credentials are read from .terraformrc
+  }
+}
+
 variable "instance_count" {
-  default = "2"
+  default = "1"
 }
 
 # Configure the Hetzner Cloud Provider using
@@ -24,7 +40,7 @@ provider "random" {
 provider "acme" {
   version = "~> 1.3"
   server_url = "https://acme-v02.api.letsencrypt.org/directory"
-#  server_url = "https://acme-staging-v02.api.letsencrypt.org/dsirectory"
+#  server_url = "https://acme-staging-v02.api.letsencrypt.org/directory"
 }
 
 # Use this to create ACME tls private keys
@@ -111,3 +127,4 @@ resource "local_file" "certificates" {
     content  = "${element(acme_certificate.certificate.*.certificate_pem, count.index)}${element(acme_certificate.certificate.*.issuer_pem, count.index)}${element(acme_certificate.certificate.*.private_key_pem, count.index)}"
     filename = "./roles/bootstrap/tls/files/${element(hcloud_server.workshop.*.name, count.index)}.k8s.o12stack.org.pem"
 }
+

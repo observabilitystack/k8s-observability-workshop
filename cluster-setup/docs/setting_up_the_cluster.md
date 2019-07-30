@@ -49,6 +49,10 @@ brew link terraform@0.11 --force
 
 > ⚠️ We need to stick to Terraform 0.11 until [this PR is merged in terraform-inventory](https://github.com/adammck/terraform-inventory/pull/114)!
 
+__Prepare remote shared state__
+
+...
+
 __Download the _Terraform_ plugins needed__ to spin up the cloud infrastructure:
 
     terraform init
