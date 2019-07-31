@@ -24,7 +24,7 @@
     line: "{{ item }}"
   loop:
     - 'echo "----------------------------------------------------" && df -ht ext4'
-    - 'echo "----------------------------------------------------" && kubectl get nodes'
+    - 'echo "----------------------------------------------------" && kubectl get nodes && kubectl describe nodes | grep -A 6 --color=never -e "^Allocated resources"'
     - 'echo "----------------------------------------------------"'
 
 - name: install k8s module requirements
