@@ -24,7 +24,7 @@ spec:
         args:
         - --update-interval-minutes=1
         # we currently use cx51 instances
-        - --additional-cost-per-cluster=35,58
+        - --additional-cost-per-cluster=35.58
         - /output
         volumeMounts:
         - mountPath: /output
