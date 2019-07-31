@@ -8,14 +8,12 @@ spec:
     - host: elasticsearch.${HOSTNAME}.k8s.o12stack.org
       http:
         paths:
-          - path: /
-            backend:
+          - backend:
               serviceName: elasticsearch
               servicePort: http
     - host: elastichq.${HOSTNAME}.k8s.o12stack.org
       http:
         paths:
-          - path: /
-            backend:
+          - backend:
               serviceName: elasticsearch
               servicePort: elastichq
