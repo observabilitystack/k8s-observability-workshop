@@ -48,18 +48,25 @@ spec:
               port: 9200
            initialDelaySeconds: 90
           resources:
-          requests:
-            cpu: "500m"
-            memory: "1Gi"
-          limits:
-            cpu: "2"
-            memory: "2Gi"
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "2"
+              memory: "2Gi"
         - name: elasticsearch-exporter
           image: justwatch/elasticsearch_exporter:1.0.2
           args:
             - "-es.all"
             - "-es.indices"
             - "-es.uri=http://localhost:9200"
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "250Mi"
+            limits:
+              cpu: "250m"
+              memory: "250Mi"
         - name: elasticsearch-elastichq
           image: elastichq/elasticsearch-hq:release-v3.5.0
           env:
@@ -68,3 +75,10 @@ spec:
           ports:
             - containerPort: 5000
               name: elastichq
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "250Mi"
+            limits:
+              cpu: "250m"
+              memory: "250Mi"
