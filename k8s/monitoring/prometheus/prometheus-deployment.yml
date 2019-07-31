@@ -1,0 +1,57 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: prometheus
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: prometheus
+      annotations:
+        checksum/configuration: ${CONF_SHA}
+    spec:
+      serviceAccountName: prometheus
+      containers:
+      - name: prometheus
+        image: prom/prometheus:${PROMETHEUS_VERSION}
+        securityContext:
+          runAsUser: 0
+        args:
+          - "--config.file=/etc/prometheus/prometheus.yml"
+          - "--storage.tsdb.path=/data"
+          - "--web.external-url=https://prometheus.${HOSTNAME}.k8s.o12stack.org"
+        ports:
+        - containerPort: 9090
+        volumeMounts:
+        - name: prometheus-configuration
+          mountPath: /etc/prometheus/prometheus.yml
+          subPath: prometheus.yml
+        - name: prometheus-configuration
+          mountPath: /etc/prometheus/alerting.rules
+          subPath: alerting.rules
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+          limits:
+            cpu: "4" # Prometheus needs huge amounts of CPU on startup when data is initially read from volume. The more, the faster.
+            memory: "4Gi"
+      - name: kube-state-metrics
+        image: k8s.gcr.io/kube-state-metrics:v1.3.1
+        args:
+          - "--port=8080"
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+      volumes:
+      - name: prometheus-configuration
+        configMap:
+          name: prometheus-configuration
