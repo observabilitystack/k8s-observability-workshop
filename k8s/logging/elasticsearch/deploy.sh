@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export ELASTICSEARCH_VERSION=7.2.0
+export ELASTICSEARCH_VERSION=6.8.2
 export HOSTNAME="${HOSTNAME:=local}"
 
 cd $(dirname "$0")
