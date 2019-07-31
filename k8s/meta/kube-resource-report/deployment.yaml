@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    application: kube-resource-report
+    version: v${KUBE_REPORT_VERSION}
+  name: kube-resource-report
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      application: kube-resource-report
+  template:
+    metadata:
+      labels:
+        application: kube-resource-report
+        version: v${KUBE_REPORT_VERSION}
+    spec:
+      serviceAccount: kube-resource-report
+      containers:
+      - name: kube-resource-report
+        # see https://github.com/hjacobs/kube-resource-report/releases
+        image: hjacobs/kube-resource-report:${KUBE_REPORT_VERSION}
+        args:
+        - --update-interval-minutes=1
+        # we currently use cx51 instances
+        - --additional-cost-per-cluster=35,58
+        - /output
+        volumeMounts:
+        - mountPath: /output
+          name: report-data
+        resources:
+          limits:
+            cpu: 250m
+            memory: 100Mi
+          requests:
+            cpu: 5m
+            memory: 50Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+      - name: nginx
+        image: nginx:alpine
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: report-data
+          readOnly: true
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+        resources:
+          limits:
+            cpu: 250m
+            memory: 50Mi
+          requests:
+            cpu: 5m
+            memory: 20Mi
+      volumes:
+          - name: report-data
+            emptyDir:
+              sizeLimit: 50Mi
