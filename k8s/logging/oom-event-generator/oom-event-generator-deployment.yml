@@ -1,0 +1,22 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: oom-event-generator
+spec:
+  template:
+    metadata:
+      labels:
+        name: oom-event-generator
+    spec:
+      serviceAccountName: oom-event-generator
+      containers:
+      - name: oom-event-generator
+        image: xingse/kubernetes-oom-event-generator
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            cpu: "1"
+            memory: "256Mi"
