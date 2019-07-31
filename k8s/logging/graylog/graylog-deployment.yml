@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: graylog
-  namespace: infrastructure
 spec:
   replicas: 1
   strategy:
@@ -58,7 +57,7 @@ spec:
         - name: GRAYLOG_ELASTICSEARCH_SHARDS
           value: "3"
         - name: GRAYLOG_MESSAGE_JOURNAL_MAX_SIZE
-          value: 1sgb
+          value: 1gb
           # the number of *BUFFER_PROCESSORS should not excceed the
           # number of cpu cores. otherwise the fun begins
         - name: GRAYLOG_INPUTBUFFER_PROCESSORS
