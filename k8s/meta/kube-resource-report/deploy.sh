@@ -4,10 +4,10 @@ cd $(dirname "$0")
 set -e
 
 application=$(basename $(pwd))
-export KUBE_REPORT_VERSION=v2.11.1
+export KUBE_RESOURCE_REPORT_VERSION=0.15
 export HOSTNAME="${HOSTNAME:=local}"
 
-echo "🚀  ${application} ${KUBE_REPORT_VERSION}"
+echo "🚀  ${application} ${KUBE_RESOURCE_REPORT_VERSION}"
 kubectl -n monitoring apply -f service.yaml
 kubectl -n monitoring apply -f rbac.yaml
 envsubst <ingress.yaml | kubectl apply -n monitoring  -f -
