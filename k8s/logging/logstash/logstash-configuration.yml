@@ -20,7 +20,7 @@ data:
       gelf {
             host => "graylog"
             port => "12201"
-            sender => "%{[kubernetes][pod]}"
+            sender => "%{[kubernetes][pod][name]}"
             protocol => "TCP"
       }
     }
