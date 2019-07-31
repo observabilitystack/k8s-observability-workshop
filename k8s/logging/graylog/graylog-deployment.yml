@@ -11,7 +11,8 @@ spec:
       name: graylog
   template:
     metadata:
-      name: graylog
+      labels:
+        name: graylog
       annotations:
         "prometheus.io/scrape": "true"
         "prometheus.io/path": "/api/plugins/org.graylog.plugins.metrics.prometheus/metrics"
