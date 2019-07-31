@@ -1,12 +1,12 @@
 #!/bin/bash
 
-export HOSTNAME="${HOSTNAME:=local}"
-
 cd $(dirname "$0")
 set -e
+application=$(basename $(pwd))
+export HOSTNAME="${HOSTNAME:=local}"
 
-echo "🚀  $(basename $(pwd))"
-kubectl -n monitoring apply -f graylog-service.yml
-envsubst <graylog-ingress.yml | kubectl apply -n monitoring  -f -
-envsubst <graylog-deployment.yml | kubectl apply -n monitoring  -f -
+echo "🚀  ${application}"
+kubectl -n monitoring apply -f ${application}-service.yml
+envsubst <${application}-ingress.yml | kubectl apply -n monitoring  -f -
+envsubst <${application}-deployment.yml | kubectl apply -n monitoring  -f -
 echo -e "🙌  Done.\n"
