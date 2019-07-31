@@ -1,0 +1,29 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: event-forwarder
+spec:
+  template:
+    metadata:
+      labels:
+        name: event-forwarder
+    spec:
+      serviceAccountName: event-forwarder
+      containers:
+      - name: event-forwarder
+        image: xingse/event-forwarder-gelf:latest
+        env:
+          - name: CLUSTER
+            value: ${HOSTNAME}
+          - name: GRAYLOG_HOST
+            value: graylog
+          - name: GRAYLOG_PORT
+            value: "12201"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            cpu: "1"
+            memory: "256Mi"
