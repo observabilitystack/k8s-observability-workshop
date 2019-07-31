@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: logstash
-        image: docker.elastic.co/logstash/logstash:${LOGSTASH_VERSION}
+        image: observabilitystack/logstash:${LOGSTASH_VERSION}
         ports:
         - containerPort: 5044
         resources:

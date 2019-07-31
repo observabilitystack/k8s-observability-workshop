@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export LOGSTASH_VERSION=7.2.0
+export LOGSTASH_VERSION=7.2.0-0
 
 cd $(dirname "$0")
 set -e
