@@ -47,6 +47,13 @@ spec:
               path: /_cluster/health?local=true
               port: 9200
            initialDelaySeconds: 90
+          resources:
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+          limits:
+            cpu: "2"
+            memory: "2Gi"
         - name: elasticsearch-exporter
           image: justwatch/elasticsearch_exporter:1.0.2
           args:

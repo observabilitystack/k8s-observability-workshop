@@ -33,7 +33,7 @@ spec:
           subPath: alerting.rules
         resources:
           requests:
-            cpu: "500m"
+            cpu: "250m"
             memory: "1Gi"
           limits:
             cpu: "4" # Prometheus needs huge amounts of CPU on startup when data is initially read from volume. The more, the faster.
