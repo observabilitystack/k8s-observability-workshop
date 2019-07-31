@@ -1,0 +1,13 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: graylog
+spec:
+  rules:
+  - host: logs.${HOSTNAME}.k8s.o12stack.org
+    http:
+      paths:
+      - backend:
+          serviceName: graylog
+          servicePort: web

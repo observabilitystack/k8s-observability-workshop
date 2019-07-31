@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graylog
+  namespace: infrastructure
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      name: graylog
+  template:
+    metadata:
+      name: graylog
+      annotations:
+        "prometheus.io/scrape": "true"
+        "prometheus.io/path": "/api/plugins/org.graylog.plugins.metrics.prometheus/metrics"
+        "prometheus.io/port": "9000"
+    spec:
+      containers:
+
+        # mongo
+      - name: mongo
+        image: mongo:3
+        resources:
+          requests:
+            cpu: "150m"
+            memory: "400Mi"
+          limits:
+            cpu: "2"
+            memory: "800Mi"
+
+        # graylog
+      - name: graylog
+        image: graylog/graylog:3.0.2
+        env:
+        - name: GRAYLOG_PASSWORD_SECRET
+          value: 69EBaFSDEJUjOdtQPTimjqhfgwZ46133aPCEzrXYralnWgBRVt1pdIq4tNCUZaE03xZaQFgyYpqUj5nTUInsGfwiu3y5NYtf
+        - name: GRAYLOG_ROOT_PASSWORD_SHA2
+          value: 9301d23d940891933baac19918ebe9e67729207c0e7f1cbb8c60e93c62000f75
+        - name: GRAYLOG_HTTP_EXTERNAL_URI
+          value: https://logs.${HOSTNAME}.k8s.o12stack.org/
+        - name: GRAYLOG_HTTP_PUBLISH_URI
+          value: https://logs.${HOSTNAME}.k8s.o12stack.org/
+        - name: GRAYLOG_MONGODB_URI
+          value: mongodb://localhost:27017/graylog2
+        - name: GRAYLOG_ELASTICSEARCH_HOSTS
+          value: "http://elasticsearch:9200"
+        - name: GRAYLOG_ROTATION_STRATEGY
+          value: time
+        - name: GRAYLOG_ELASTICSEARCH_MAX_TIME_PER_INDEX
+          value: "1d"
+        - name: GRAYLOG_ELASTICSEARCH_MAX_NUMBER_OF_INDICES
+          value: "10"
+        - name: GRAYLOG_ELASTICSEARCH_INDEX_PREFIX
+          value: "graylog_logs"
+        - name: GRAYLOG_ELASTICSEARCH_SHARDS
+          value: "3"
+        - name: GRAYLOG_MESSAGE_JOURNAL_MAX_SIZE
+          value: 1sgb
+          # the number of *BUFFER_PROCESSORS should not excceed the
+          # number of cpu cores. otherwise the fun begins
+        - name: GRAYLOG_INPUTBUFFER_PROCESSORS
+          value: "2"
+        - name: GRAYLOG_OUTPUTBUFFER_PROCESSORS
+          value: "2"
+        - name: GRAYLOG_PROCESSBUFFER_PROCESSORS
+          value: "2"
+        - name: GRAYLOG_SERVER_JAVA_OPTS
+          value: -Xms2g -Xmx2g -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:NewRatio=1 -XX:MaxMetaspaceSize=256m -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow
+        livenessProbe:
+          httpGet:
+            path: /system/lbstatus
+            port: 9000
+            scheme: HTTP
+          initialDelaySeconds: 600
+        readinessProbe:
+          httpGet:
+            path: /system/lbstatus
+            port: 9000
+            scheme: HTTP
+          initialDelaySeconds: 120
+        resources:
+          requests:
+            cpu: "2"
+            memory: "2Gi"
+          limits:
+            cpu: "3"
+            memory: "4Gi"
+        ports:
+        - containerPort: 9000
+        - containerPort: 12201

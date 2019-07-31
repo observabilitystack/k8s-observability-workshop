@@ -17,5 +17,10 @@ data:
     }
     
     output {
-      stdout{ codec => line { format => "Dropping msg from %{source}: %{message}" } }
+      gelf {
+            host => "graylog"
+            port => "12201"
+            sender => "%{[kubernetes][pod]}"
+            protocol => "TCP"
+      }
     }

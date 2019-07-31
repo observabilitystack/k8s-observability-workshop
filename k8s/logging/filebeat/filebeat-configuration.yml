@@ -42,4 +42,4 @@ data:
               kubernetes.annotations.org.o12stack/logs.enable: 'false'
   
     output.logstash:
-      hosts: ["logstash.monitoring:5044"]
+      hosts: ["logstash:5044"]
