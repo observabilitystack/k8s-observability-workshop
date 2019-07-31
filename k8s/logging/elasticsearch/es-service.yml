@@ -6,7 +6,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - name: elasticsearch
+    - name: http
       port: 9200
       targetPort: http
     - name: transport
