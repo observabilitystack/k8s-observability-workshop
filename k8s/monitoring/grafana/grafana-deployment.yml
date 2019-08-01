@@ -53,5 +53,5 @@ spec:
         configMap:
           name: grafana-configuration
           items:
-            - key: datasource.yaml
-              path: datasource.yaml
+            - key: prometheus.yaml
+              path: datasources/prometheus.yaml
