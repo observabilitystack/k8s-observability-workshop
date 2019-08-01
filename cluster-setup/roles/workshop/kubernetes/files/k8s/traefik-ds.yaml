@@ -40,6 +40,9 @@ spec:
         args:
         - --api
         - --kubernetes
+        - --metrics
+        - --metrics.prometheus
+        - --ping
         - --logLevel=INFO
         - --defaultentrypoints=http,https
         - --entrypoints=Name:https Address::443 TLS
