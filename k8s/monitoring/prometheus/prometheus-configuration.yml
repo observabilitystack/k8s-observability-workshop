@@ -30,4 +30,4 @@ data:
         relabel_configs:
         - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
           action: keep
-          regex: kube-system;traefik-web-ui-service;web
+          regex: kube-system;traefik-web-ui;web
