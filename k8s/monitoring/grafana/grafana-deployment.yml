@@ -16,6 +16,7 @@ spec:
       annotations:
         checksum/configuration: ${CONF_SHA}
         checksum/environment: ${ENV_SHA}
+        prometheus.io/scrape: "true"
     spec:
       securityContext:
         fsGroup: 472
@@ -44,6 +45,8 @@ spec:
           #port: 3000
           #initialDelaySeconds: 30
           #timeoutSeconds: 1
+        ports:
+        - containerPort: 9000
         volumeMounts:
         - name: grafana-configuration
           mountPath: /etc/grafana/provisioning
