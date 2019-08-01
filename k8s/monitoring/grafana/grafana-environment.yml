@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-environment
+  labels:
+    application: grafana
+    component: monitoring
+data:
+  GF_INSTALL_PLUGINS: "btplc-trend-box-panel,fzakaria-simple-annotations-datasource,grafana-clock-panel,grafana-piechart-panel,grafana-worldmap-panel,vonage-status-panel,raintank-worldping-app,petrslavotinek-carpetplot-panel,natel-discrete-panel,grafana-polystat-panel,camptocamp-prometheus-alertmanager-datasource"
+  GF_DEFAULT_APP_MODE: production
+  GF_SERVER_PROTOCOL: http
+  GF_SERVER_HTTP_PORT: "3000"
+  GF_SERVER_DOMAIN: grafana.${HOSTNAME}.k8s.o12stack.org
+  GF_SERVER_ROOT_URL: https://grafana.${HOSTNAME}.k8s.o12stack.org/
+  GF_DATABASE_TYPE: mysql
+  GF_ANALYTICS_REPORTING_ENABLED: "false"
+  GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+  GF_SECURITY_ADMIN_USER: admin
+  GF_SECURITY_SECRET_KEY: "ywa2/]ngw:jhG`b8`L`p0Kh[A#B>}Ip_wVy=PEA.+=N^]wo9jwlTcwkV+D96gAkE"
+  GF_SECURITY_LOGIN_REMEMBER_DAYS: "7"
+  GF_USERS_ALLOW_SIGN_UP: "false"
+  GF_USERS_ALLOW_ORG_CREATE: "false"
+  GF_USERS_AUTO_ASSIGN_ORG: "true"
+  GF_USERS_AUTO_ASSIGN_ORG_ROLE: Viewer
+  GF_USERS_DEFAULT_THEME: light
+  GF_EXPLORE_ENABLED: "true"
+  GF_METRICS_ENABLED: "true"
+  GF_METRICS_INTERVAL_SECONDS: "60"
+  GF_SNAPSHOTS_EXTERNAL_ENABLED: "false"
