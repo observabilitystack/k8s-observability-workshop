@@ -30,7 +30,7 @@ data:
         kubernetes_sd_configs:
         - role: ingress
 
-      - job_name: 'kubernetes-node-exporter'
+      - job_name: 'kubernetes-node'
         kubernetes_sd_configs:
         - role: node
 
