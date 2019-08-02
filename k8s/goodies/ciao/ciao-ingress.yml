@@ -1,0 +1,16 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    application: ciao
+    component: monitoring
+  name: ciao
+spec:
+  rules:
+  - host: ciao.${HOSTNAME}.k8s.o12stack.org
+    http:
+      paths:
+      - backend:
+          serviceName: ciao
+          servicePort: web

@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ciao-environment
+  labels:
+    application: ciao
+    component: monitoring
+data:
+  PROMETHEUS_ENABLE: "true"
+  BASIC_AUTH_USERNAME: admin
+  BASIC_AUTH_PASSWORD: o12stack
+  TIME_ZONE: Berlin

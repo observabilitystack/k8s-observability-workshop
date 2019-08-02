@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ciao
+  namespace: monitoring
+  labels:
+    application: ciao
+    component: monitoring
+spec:
+  template:
+    metadata:
+      labels:
+        application: ciao
+        component:  monitoring
+      annotations:
+        checksum/configuration: ${ENV_SHA}
+        prometheus.io/scrape: "true"
+    spec:
+      containers:
+      - image: brotandgames/ciao
+        name: ciao
+        envFrom:
+        - configMapRef:
+            name: ciao-environment
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 400m
+            memory: 500Mi
+        ports:
+        - containerPort: 3000
