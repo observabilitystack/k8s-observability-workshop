@@ -7,6 +7,10 @@ metadata:
     app: filebeat
 data:
   filebeat.yml: |-
+    http:
+      enabled: true
+      host: localhost
+      port: 5066
     filebeat.autodiscover:
       providers:
         - type: kubernetes

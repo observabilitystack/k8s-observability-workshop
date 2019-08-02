@@ -12,6 +12,8 @@ spec:
         name: filebeat
       annotations:
         checksum/configuration: ${CONF_SHA}
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9479"
     spec:
       serviceAccountName: filebeat
       terminationGracePeriodSeconds: 30
@@ -37,6 +39,9 @@ spec:
         - name: containerdir
           mountPath: /var/lib/docker/containers
           readOnly: true
+      - name: filebeat-exporter
+        image: trustpilot/beat-exporter
+
 
       volumes:
       - name: filebeat-configuration
