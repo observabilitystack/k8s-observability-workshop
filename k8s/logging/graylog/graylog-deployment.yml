@@ -33,7 +33,7 @@ spec:
 
         # graylog
       - name: graylog
-        image: graylog/graylog:3.0.2
+        image: observabilitystack/graylog:3.0.2-0
         env:
         - name: GRAYLOG_PASSWORD_SECRET
           value: 69EBaFSDEJUjOdtQPTimjqhfgwZ46133aPCEzrXYralnWgBRVt1pdIq4tNCUZaE03xZaQFgyYpqUj5nTUInsGfwiu3y5NYtf
