@@ -17,6 +17,8 @@ spec:
       labels:
         application: node-exporter
         version: ${NODE_EXPORTER_VERSION}
+      annotations:
+        prometheus.io/scrape: "true"
     spec:
       containers:
         - name: prometheus-node-exporter
