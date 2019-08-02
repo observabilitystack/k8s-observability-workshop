@@ -36,6 +36,9 @@ data:
       - job_name: kubernetes-pods
         kubernetes_sd_configs:
         - role: pod
+        basic_auth:
+          username: 'admin'
+          password: 'o12stack'
         relabel_configs:
           # ... if they have a scrape annotation
         - action: keep
