@@ -10,6 +10,8 @@ spec:
         name: logstash
       annotations:
         checksum/configuration: ${CONF_SHA}
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9304"
     spec:
       containers:
       - name: logstash
@@ -34,6 +36,15 @@ spec:
             port: 9600
           initialDelaySeconds: 10
           periodSeconds: 5
+      - name: logstash-exporter
+        image: alxrem/prometheus-logstash-exporter:latest
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "100Mi"
+          limits:
+            cpu: "200m"
+            memory: "250Mi"
 
       volumes:
       - name: logstash-configuration
