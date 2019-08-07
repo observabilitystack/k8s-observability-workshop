@@ -1,6 +1,0 @@
----
-# This provisions workshop specific software to the hosts
-- hosts: workshop
-  roles:
-    - kubernetes
-    - workshop-content

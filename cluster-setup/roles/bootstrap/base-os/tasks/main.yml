@@ -1,6 +1,0 @@
----
-- include: selinux.yml
-- include: packages.yml
-- include: user.yml
-- include: sudo.yml
-- include: motd.yml
