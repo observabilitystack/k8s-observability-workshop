@@ -7,7 +7,7 @@ metadata:
     application: grafana
     component: monitoring
 data:
-  GF_INSTALL_PLUGINS: "btplc-trend-box-panel,fzakaria-simple-annotations-datasource,grafana-clock-panel,grafana-piechart-panel,grafana-worldmap-panel,vonage-status-panel,raintank-worldping-app,petrslavotinek-carpetplot-panel,natel-discrete-panel,grafana-polystat-panel,camptocamp-prometheus-alertmanager-datasource"
+  # GF_INSTALL_PLUGINS: "btplc-trend-box-panel,fzakaria-simple-annotations-datasource,grafana-clock-panel,grafana-piechart-panel,grafana-worldmap-panel,vonage-status-panel,raintank-worldping-app,petrslavotinek-carpetplot-panel,natel-discrete-panel,grafana-polystat-panel,camptocamp-prometheus-alertmanager-datasource"
   GF_DEFAULT_APP_MODE: production
   GF_SERVER_PROTOCOL: http
   GF_SERVER_HTTP_PORT: "3000"
