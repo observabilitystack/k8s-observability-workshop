@@ -7,4 +7,4 @@ spec:
   - name: web
     port: 5000
   selector:
-    application: checkmks
+    application: checkmk
