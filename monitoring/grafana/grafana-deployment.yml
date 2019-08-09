@@ -23,7 +23,7 @@ spec:
       initContainers:
         - name: grafana-dashboard-download
           image: busybox
-          command: ['sh', '-c', 'wget -O /var/lib/grafana/dashboards/traefik.json https://grafana.com/api/dashboards/4475/revisions/4/download && sed -i "s/\${DS_PROMETHEUS}/prometheus/g" /var/lib/grafana/dashboards/traefik.json']
+          command: ['sh', '-c', 'wget -O /var/lib/grafana/dashboards/traefik.json https://grafana.com/api/dashboards/4475/revisions/4/download; sed -i "s/\${DS_PROMETHEUS}/prometheus/g" /var/lib/grafana/dashboards/traefik.json']
           volumeMounts:
           - name: grafana-dashboards
             mountPath: /var/lib/grafana/dashboards
