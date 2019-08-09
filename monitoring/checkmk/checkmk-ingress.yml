@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: checkmk-ingress
+spec:
+  rules:
+  - host: checkmk.${HOSTNAME}.k8s.o12stack.org
+    http:
+      paths:
+      - backend:
+          serviceName: checkmk
+          servicePort: web

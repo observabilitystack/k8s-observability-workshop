@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: checkmk
+  labels:
+    application: checkmk
+    version: ${CHECKMK_VERSION}
+spec:
+  selector:
+    matchLabels:
+      application: checkmk
+      version: ${CHECKMK_VERSION}
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        application: checkmk
+        version: ${CHECKMK_VERSION}
+    spec:
+      containers:
+        - name: checkmk
+          image: checkmk/check-mk-raw:${CHECKMK_VERSION}
+          resources:
+            limits:
+              memory: 50Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+      hostNetwork: true
+      hostPID: true
