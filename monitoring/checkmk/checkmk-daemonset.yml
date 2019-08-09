@@ -21,6 +21,11 @@ spec:
       containers:
         - name: checkmk
           image: checkmk/check-mk-raw:${CHECKMK_VERSION}
+          environment:
+            - name: CMK_PASSWORD
+              value: zun+IbqYANSQq0G
+            - name: CMK_SITE_ID
+              value: o12stack
           resources:
             limits:
               cpu: 756m
