@@ -14,7 +14,7 @@ data:
         type: prometheus
         access: proxy
         url: http://prometheus:9090
-  dashboards.yml: |
+  dashboards.yaml: |
     apiVersion: 1
     providers:
     - name: 'traefik'
