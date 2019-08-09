@@ -20,6 +20,14 @@ spec:
     spec:
       securityContext:
         fsGroup: 472
+      initContainers:
+        - name: grafana-dashboard-download
+          image: busybox
+          command:
+          - wget -O /var/lib/grafana/dashboards/traefik.json https://grafana.com/api/dashboards/4475/revisions/4/download
+          volumeMounts:
+          - name: grafana-dashboards
+            mountPath: /var/lib/grafana/dashboards
       containers:
       - image: grafana/grafana:${GRAFANA_VERSION}
         name: grafana
@@ -50,6 +58,8 @@ spec:
         volumeMounts:
         - name: grafana-configuration
           mountPath: /etc/grafana/provisioning
+        - name: grafana-dashboards
+          mountPath: /var/lib/grafana/dashboards
 
       volumes:
       - name: grafana-configuration
@@ -58,3 +68,8 @@ spec:
           items:
             - key: prometheus.yaml
               path: datasources/prometheus.yaml
+            - key: dashboards.yaml
+              path: dashboards/dashboards.yaml
+      - name: grafana-dashboards
+        emptyDir: {}
+
