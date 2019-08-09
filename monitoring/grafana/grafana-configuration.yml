@@ -10,7 +10,7 @@ data:
   prometheus.yaml: |
     apiVersion: 1
     datasources:
-      - name: Prometheus
+      - name: prometheus
         type: prometheus
         access: proxy
         url: http://prometheus:9090
@@ -22,3 +22,4 @@ data:
       type: file
       options:
         path: /var/lib/grafana/dashboards
+        url: https://grafana.com/api/dashboards/4475/revisions/4/download
