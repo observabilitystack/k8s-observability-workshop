@@ -2,6 +2,8 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: checkmk-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/request-modifier: "AddPrefix: /cmk"
 spec:
   rules:
   - host: checkmk.${HOSTNAME}.k8s.o12stack.org
