@@ -21,7 +21,7 @@ spec:
         args:
           - "--config.file=/etc/prometheus/prometheus.yml"
           - "--storage.tsdb.path=/data"
-          - "--web.external-url=https://prometheus.${HOSTNAME}.k8s.o12stack.org"
+          - "--web.external-url=https://prometheus.${HOSTNAME}.${DOMAIN_NAME}"
         ports:
         - containerPort: 9090
         volumeMounts:

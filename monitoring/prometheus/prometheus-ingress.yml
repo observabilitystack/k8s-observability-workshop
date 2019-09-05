@@ -4,7 +4,7 @@ metadata:
   name: prometheus-ingress
 spec:
   rules:
-  - host: prometheus.${HOSTNAME}.k8s.o12stack.org
+  - host: prometheus.${HOSTNAME}.${DOMAIN_NAME}
     http:
       paths:
       - backend:
