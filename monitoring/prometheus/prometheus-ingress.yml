@@ -8,5 +8,5 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: prometheus-service
+          serviceName: prometheus
           servicePort: web
