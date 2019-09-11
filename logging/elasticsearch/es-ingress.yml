@@ -5,13 +5,13 @@ metadata:
   name: elasticsearch
 spec:
   rules:
-    - host: elasticsearch.${HOSTNAME}.k8s.o12stack.org
+    - host: elasticsearch.${HOSTNAME}.${DOMAIN_NAME}
       http:
         paths:
           - backend:
               serviceName: elasticsearch
               servicePort: http
-    - host: elastichq.${HOSTNAME}.k8s.o12stack.org
+    - host: elastichq.${HOSTNAME}.${DOMAIN_NAME}
       http:
         paths:
           - backend:
