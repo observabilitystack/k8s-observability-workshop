@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging-test-driver-nginx 
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      name: logging-test-driver-nginx
+  template:
+    metadata:
+      labels:
+        name: logging-test-driver-nginx
+      annotations:
+        "org.o12stack/logs.enable": "true"
+        "org.o12stack/logs.hint": "access-log"
+    spec:
+      containers:
+      - name: logging-test-driver-nginx
+        image: observabilitystack/logging-test-driver-nginx:3
+        env:
+        - name: LOG_LINES_PER_MINUTE
+          value: "500"
