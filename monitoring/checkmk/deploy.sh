@@ -5,6 +5,7 @@ set -e
 
 export CHECKMK_VERSION=1.5.0p21
 export HOSTNAME="${HOSTNAME:=local}"
+export DOMAIN_NAME="${DOMAIN_NAME:=k8s.o12stack.org}"
 application=$(basename $(pwd))
 
 echo "🚀  ${application} ${CHECKMK_VERSION}"

@@ -6,7 +6,7 @@ metadata:
   name: kube-resource-report
 spec:
   rules:
-  - host: kube-resource-report.${HOSTNAME}.k8s.o12stack.org
+  - host: kube-resource-report.${HOSTNAME}.${DOMAIN_NAME}
     http:
       paths:
       - backend:

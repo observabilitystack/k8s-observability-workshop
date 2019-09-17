@@ -6,7 +6,7 @@ metadata:
     traefik.ingress.kubernetes.io/app-root: /cmk
 spec:
   rules:
-  - host: checkmk.${HOSTNAME}.k8s.o12stack.org
+  - host: checkmk.${HOSTNAME}.${DOMAIN_NAME}
     http:
       paths:
       - backend:

@@ -8,7 +8,7 @@ metadata:
   name: ciao
 spec:
   rules:
-  - host: ciao.${HOSTNAME}.k8s.o12stack.org
+  - host: ciao.${HOSTNAME}.${DOMAIN_NAME}
     http:
       paths:
       - backend:

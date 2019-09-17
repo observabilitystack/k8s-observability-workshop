@@ -8,7 +8,7 @@ metadata:
   name: grafana
 spec:
   rules:
-  - host: grafana.${HOSTNAME}.k8s.o12stack.org
+  - host: grafana.${HOSTNAME}.${DOMAIN_NAME}
     http:
       paths:
       - backend:

@@ -40,9 +40,9 @@ spec:
         - name: GRAYLOG_ROOT_PASSWORD_SHA2
           value: 9301d23d940891933baac19918ebe9e67729207c0e7f1cbb8c60e93c62000f75
         - name: GRAYLOG_HTTP_EXTERNAL_URI
-          value: https://logs.${HOSTNAME}.k8s.o12stack.org/
+          value: https://logs.${HOSTNAME}.${DOMAIN_NAME}/
         - name: GRAYLOG_HTTP_PUBLISH_URI
-          value: https://logs.${HOSTNAME}.k8s.o12stack.org/
+          value: https://logs.${HOSTNAME}.${DOMAIN_NAME}/
         - name: GRAYLOG_MONGODB_URI
           value: mongodb://localhost:27017/graylog2
         - name: GRAYLOG_ELASTICSEARCH_HOSTS

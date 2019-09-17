@@ -2,6 +2,7 @@
 
 export ELASTICSEARCH_VERSION=6.8.2
 export HOSTNAME="${HOSTNAME:=local}"
+export DOMAIN_NAME="${DOMAIN_NAME:=k8s.o12stack.org}"
 
 cd $(dirname "$0")
 set -e

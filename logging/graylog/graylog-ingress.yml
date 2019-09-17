@@ -5,7 +5,7 @@ metadata:
   name: graylog
 spec:
   rules:
-  - host: logs.${HOSTNAME}.k8s.o12stack.org
+  - host: logs.${HOSTNAME}.${DOMAIN_NAME}
     http:
       paths:
       - backend:
