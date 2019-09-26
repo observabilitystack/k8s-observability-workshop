@@ -24,7 +24,7 @@ spec:
       containers:
 
       - name: o12stack-test-center
-        image: observabilitystack/o12stack-test-center:3
+        image: observabilitystack/o12stack-test-center:4
         resources:
           requests:
             cpu: "100m"
