@@ -17,19 +17,39 @@ data:
           hints.enabled: true
           include_annotations: ['org.o12stack/logs.enable', 'org.o12stack/logs.hint']
           templates:
+            # Logging from log4j as single-line JSON documents
+            # This template applies if the logging is enabled AND the hint 'log4j-json' is given
             - condition:
                 and:
-                  - not.has_fields: ['kubernetes.annotations.co.elastic.logs/multiline.pattern', 'kubernetes.annotations.co.elastic.logs/multiline.negate', 'kubernetes.annotations.co.elastic.logs/multiline.match'] 
+                  - equals.kubernetes.annotations.org.o12stack/logs.enable: 'true'          
+                  - equals.kubernetes.annotations.org.o12stack/logs.hint: 'log4j-json'          
               config:
                 - type: docker
                   containers.ids:
                     - "${data.kubernetes.container.id}"
-                  multiline:
-                    pattern: '^\[*\d{2,4}'
-                    negate: true
-                    match: after
+                  # The JSON document is merged into the Log data at root level      
+                  json.keys_under_root: 'true'
+            # Logging as web access log
             - condition:
                 and:
+                  - equals.kubernetes.annotations.org.o12stack/logs.enable: 'true'          
+                  - equals.kubernetes.annotations.org.o12stack/logs.hint: 'access-log'          
+              config:
+                - type: docker
+                  containers.ids:
+                    - "${data.kubernetes.container.id}"
+            # Custom multiline logging
+            # If the 3 standard annotations ...
+            #   - co.elastic.logs/multiline.pattern
+            #   - co.elastic.logs/multiline.negate
+            #   - co.elastic.logs/multiline.match
+            # ... are ALL set, they are applied as described here:
+            # https://www.elastic.co/guide/en/beats/filebeat/current/multiline-examples.html
+            - condition:
+                and:
+                  - equals.kubernetes.annotations.org.o12stack/logs.enable: 'true'          
+                  - not.equals.kubernetes.annotations.org.o12stack/logs.hint: 'log4j-json'          
+                  - not.equals.kubernetes.annotations.org.o12stack/logs.hint: 'access-log'          
                   - has_fields: ['kubernetes.annotations.co.elastic.logs/multiline.pattern', 'kubernetes.annotations.co.elastic.logs/multiline.negate', 'kubernetes.annotations.co.elastic.logs/multiline.match'] 
               config:
                 - type: docker
@@ -39,6 +59,24 @@ data:
                     pattern: "${data.kubernetes.annotations.co.elastic.logs/multiline.pattern}"
                     negate: "${data.kubernetes.annotations.co.elastic.logs/multiline.negate}"
                     match: "${data.kubernetes.annotations.co.elastic.logs/multiline.match}"
+            # Standard logging (fallback)
+            # The standard logging is multi-line aware:
+            # Every line that starts with an opening square bracket followed by a 2 to 4 digit number
+            # is considered to start a log message.
+            - condition:
+                and:
+                  - equals.kubernetes.annotations.org.o12stack/logs.enable: 'true'          
+                  - not.equals.kubernetes.annotations.org.o12stack/logs.hint: 'log4j-json'          
+                  - not.equals.kubernetes.annotations.org.o12stack/logs.hint: 'access-log'          
+                  - not.has_fields: ['kubernetes.annotations.co.elastic.logs/multiline.pattern', 'kubernetes.annotations.co.elastic.logs/multiline.negate', 'kubernetes.annotations.co.elastic.logs/multiline.match'] 
+              config:
+                - type: docker
+                  containers.ids:
+                    - "${data.kubernetes.container.id}"
+                  multiline:
+                    pattern: '^\[*\d{2,4}'
+                    negate: true
+                    match: after
     processors:
     - drop_event:
         when:
