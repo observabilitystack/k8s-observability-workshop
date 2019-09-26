@@ -1,0 +1,13 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: o12stack-test-center 
+spec:
+  rules:
+  - host: o12stack-test-center.${HOSTNAME}.${DOMAIN_NAME}
+    http:
+      paths:
+      - backend:
+          serviceName: o12stack-test-center
+          servicePort: web

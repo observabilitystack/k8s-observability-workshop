@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: o12stack-test-center 
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      name: o12stack-test-center
+  template:
+    metadata:
+      labels:
+        name: o12stack-test-center
+      annotations:
+        "prometheus.io/scrape": "true"
+        "prometheus.io/path": "/actuator/prometheus"
+        "prometheus.io/port": "8080"
+        "org.o12stack/logs.enable": "true"
+        "org.o12stack/logs.hint": "log4j-json"
+
+    spec:
+      containers:
+
+      - name: o12stack-test-center
+        image: observabilitystack/o12stack-test-center:3
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "1Gi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
+        ports:
+        - containerPort: 8080
