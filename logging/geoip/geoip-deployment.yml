@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geoip 
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      name: geoip
+  template:
+    metadata:
+      labels:
+        name: geoip
+      annotations:
+        "prometheus.io/scrape": "true"
+        "prometheus.io/path": "/actuator/prometheus"
+        "prometheus.io/port": "8080"
+        "org.o12stack/logs.enable": "true"
+
+    spec:
+      containers:
+
+      - name: geoip
+        image: observabilitystack/geoip-api:latest
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "1Gi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
+        ports:
+        - containerPort: 8080

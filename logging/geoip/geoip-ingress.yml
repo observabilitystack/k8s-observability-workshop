@@ -1,0 +1,13 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: geoip
+spec:
+  rules:
+  - host: geoip.${HOSTNAME}.${DOMAIN_NAME}
+    http:
+      paths:
+      - backend:
+          serviceName: geoip
+          servicePort: web
