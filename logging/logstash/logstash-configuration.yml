@@ -11,16 +11,24 @@ data:
         tags => [ "input:beats" ]
       }
     }
-    
-    filter {
 
+    filter {
+      mutate {
+        # remove unnecessary fields    
+        remove_field => [ "[agent]", "[ecs][version]", "[input][type]", "[log]" ]
+        # clean up kubernetes metadata
+        rename => { "[kubernetes][node][name]" => "[kubernetes][node]" } 
+        rename => { "[kubernetes][container][name]" => "[kubernetes][container]" }
+        rename => { "[kubernetes][replicaset][name]" => "[kubernetes][replicaset]"} 
+        rename => { "[kubernetes][pod][name]" => "[kubernetes][pod]" }
+      }
     }
     
     output {
       gelf {
             host => "graylog"
             port => "12201"
-            sender => "%{[kubernetes][pod][name]}"
+            sender => "%{[kubernetes][pod]}"
             protocol => "TCP"
       }
     }
