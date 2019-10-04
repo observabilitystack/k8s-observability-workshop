@@ -22,6 +22,16 @@ data:
         rename => { "[kubernetes][replicaset][name]" => "[kubernetes][replicaset]"} 
         rename => { "[kubernetes][pod][name]" => "[kubernetes][pod]" }
       }
+
+      # parse access log
+      if [kubernetes][annotations][org_o12stack/logs_hint] == "access-log" {
+        grok {
+          match => { "message" => "^%{COMMONAPACHELOG}$" }
+          tag_on_failure => [ "access-log-parsing-error" ]
+          add_tag => [ "access-log-parsed" ]
+          overwrite => [ "clientip", "ident", "auth", "timestamp", "verb", "request", "httpversion", "response", "bytes", "referrer", "agent" ]
+        }
+      }
     }
     
     output {
