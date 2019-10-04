@@ -32,6 +32,34 @@ data:
           overwrite => [ "clientip", "ident", "auth", "timestamp", "verb", "request", "httpversion", "response", "bytes", "referrer", "agent" ]
         }
       }
+
+      # geoip stuff
+      if [clientip] {
+        
+        # resolve clientip -> geoip information
+        http {
+          url => "http://geoip:8080/%{clientip}"
+          target_body => "geoip"
+          target_headers => "geoipheaders"
+        }
+
+        # put coords in a single field for map view in Graylog e.a.
+        if [geoip][latitude] and [geoip][longitude] {
+          mutate {
+            add_field => { "[geoip][coords]" => "%{[geoip][latitude]},%{[geoip][longitude]}" }
+            remove_field => [ "[geoip][latitude]", "[geoip][longitude]" ]
+          }
+        }
+
+        # cleanup http response headers
+        if [geoipheaders] {
+          mutate {
+            remove_field => [ "[geoipheaders]" ]
+          }
+        }
+      }
+
+      
     }
     
     output {
