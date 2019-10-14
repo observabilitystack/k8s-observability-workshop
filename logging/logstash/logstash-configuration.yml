@@ -71,7 +71,13 @@ data:
         }
       }
 
-      
+      # parsing of job id for o12stack-test-center application
+      if [kubernetes][container] == "o12stack-test-center" {
+        grok {
+          match => { "message" => "%{UUID:o12stack_test_center_job}" }
+          add_tag => [ "o12stack-test-center-job-parsed" ]
+        }
+      }
     }
     
     output {
