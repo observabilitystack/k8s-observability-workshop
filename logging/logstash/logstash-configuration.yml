@@ -13,6 +13,18 @@ data:
     }
 
     filter {
+
+      # log4j JSON parsing
+      if [kubernetes][annotations][org_o12stack/logs_hint] == "log4j-json" {
+        mutate {
+          add_field => {
+            # disambiguation: 'level' is later overwritten by Graylog's gelf input
+            "log_level" => "%{[level]}"
+          }
+          add_tag => [ "log4j-json-parsed" ]
+        }
+      }
+
       mutate {
         # remove unnecessary fields    
         remove_field => [ "[agent]", "[ecs][version]", "[input][type]", "[log]" ]
