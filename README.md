@@ -34,6 +34,10 @@ Once you have your public SSH key ready, please send it over to one of our email
 
 For a smooth editing experience, please install an editor that enables you to edit the files directly on a remote host. We recommend [Visual Studio Code](https://code.visualstudio.com/) with the [Remote-SSH](https://code.visualstudio.com/docs/remote/ssh) extension.
 
+### Join our Slack 
+
+We use Slack to easily share stuff before and during our workshops. You're welcome to join, please use [this link](https://join.slack.com/t/o12stack/shared_invite/enQtODA0MzAzMjAwNzUyLTY1YTViZjVlZjY3ZjFkZTNlM2E1YWFiMTY4M2QwOTRhN2IyMjM3M2Q5MmYxMzUyMDk4ZGFkZmY1NzhlNmQ4ZDU).
+
 ### Contact/Email
 
 [Torsten](mailto:tbk@thiswayup.de)
