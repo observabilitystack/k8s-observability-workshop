@@ -35,15 +35,7 @@ spec:
         # create first admin user
       - name: sentry-create-admin-user
         image: sentry:9
-        command:
-          - sentry
-          - createuser 
-          - --email 
-          - admin@${HOSTNAME}.${DOMAIN_NAME}
-          - --password 
-          - o12stack 
-          - --superuser 
-          - --no-input
+        command: ['sh', '-c', 'sentry createuser --email admin@${HOSTNAME}.${DOMAIN_NAME} --password o12stack --superuser --no-input || true' ]
         envFrom:
         - configMapRef:
             name: sentry-environment
