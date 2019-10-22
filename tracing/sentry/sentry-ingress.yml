@@ -1,0 +1,15 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    application: sentry
+  name: sentry
+spec:
+  rules:
+  - host: sentry.${HOSTNAME}.${DOMAIN_NAME}
+    http:
+      paths:
+      - backend:
+          serviceName: sentry
+          servicePort: web
