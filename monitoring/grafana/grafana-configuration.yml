@@ -7,7 +7,7 @@ metadata:
     application: grafana
     component: monitoring
 data:
-  prometheus.yaml: |
+  datasources.yaml: |
     apiVersion: 1
     datasources:
       - name: prometheus
@@ -15,6 +15,10 @@ data:
         access: proxy
         isDefault: true
         url: http://prometheus:9090
+      - name: elasticsearch
+        type: elasticsearch
+        access: proxy
+        url: http://elasticsearch:9200
   dashboards.yaml: |
     apiVersion: 1
     providers:
