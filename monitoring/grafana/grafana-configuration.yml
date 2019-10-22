@@ -53,4 +53,4 @@ data:
         recipient: "#test"
         iconEmoji: ":rocket:"
         uploadImage: false
-        url: https://hooks.slack.com/services/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
+        url: ${SLACK_HOOK_URL}

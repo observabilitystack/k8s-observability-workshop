@@ -10,6 +10,7 @@ export DOMAIN_NAME="${DOMAIN_NAME:=k8s.o12stack.org}"
 export CONF_SHA=$(shasum ${application}-configuration.yml | awk '{print $1}')
 export ENV_SHA=$(shasum ${application}-environment.yml | awk '{print $1}')
 export DOLLAR='$'
+export SLACK_HOOK=$(echo -n 'aHR0cHM6Ly9ob29rcy5zbGFjay5jb20vc2VydmljZXMvVFBNSDJOMkU4L0JQUTdMMThUWi9jeGlMN1Ftc2JBVnozYXNmSW9qSUZNVWc=' | base64 -d)
 
 echo "🚀  ${application} ${GRAFANA_VERSION}"
 envsubst <${application}-configuration.yml | kubectl apply -n monitoring  -f -
