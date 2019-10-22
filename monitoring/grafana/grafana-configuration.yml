@@ -51,6 +51,6 @@ data:
       settings:
         username: grafana-${HOSTNAME}
         recipient: "#test"
-        iconEmoji: ":rocket:"
+        iconEmoji: rocket
         uploadImage: false
         url: ${SLACK_HOOK_URL}
