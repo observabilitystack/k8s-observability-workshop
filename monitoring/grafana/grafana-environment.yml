@@ -38,4 +38,6 @@ data:
     sed -i 's/${DOLLAR}{DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/2525.json &&
     wget -O /var/lib/grafana/dashboards/kubernetes/6787.json https://grafana.com/api/dashboards/6787/revisions/1/download &&
     sed -i 's/${DOLLAR}{DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/6787.json &&
+    wget -O /var/lib/grafana/dashboards/kubernetes/747.json https://grafana.com/api/dashboards/747/revisions/2/download &&
+    sed -i 's/${DOLLAR}{DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/747.json &&
     wget -O /var/lib/grafana/dashboards/applications/o12stack.json https://raw.githubusercontent.com/observabilitystack/o12stack-test-center/master/local-demo/grafana/dashboards/o12stack-test-center.json
