@@ -12,3 +12,4 @@ data:
     beacon.anonymous: true
     system.admin-email: "admin@${HOSTNAME}.${DOMAIN_NAME}"
     system.url-prefix: "https://sentry.${HOSTNAME}.${DOMAIN_NAME}/"
+    system.secret-key: "ssyrwhcxed+!kr6w&q=8f(pb*q^+a=gz+o2c+u%dncpdbih@ih"
