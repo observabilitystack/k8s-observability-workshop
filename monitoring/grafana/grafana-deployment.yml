@@ -17,6 +17,7 @@ spec:
         checksum/configuration: ${CONF_SHA}
         checksum/environment: ${ENV_SHA}
         prometheus.io/scrape: "true"
+        prometheus.io/port: "3000"
     spec:
       securityContext:
         fsGroup: 472
