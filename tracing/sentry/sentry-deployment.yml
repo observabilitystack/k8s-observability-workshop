@@ -48,6 +48,7 @@ spec:
         image: sentry:9
         command:
           - sentry
+          - run
           - cron
         resources:
           requests:
@@ -63,6 +64,7 @@ spec:
         image: sentry:9
         command:
           - sentry
+          - run
           - worker
         resources:
           requests:
