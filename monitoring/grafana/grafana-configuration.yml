@@ -18,6 +18,9 @@ data:
       - name: elasticsearch
         type: elasticsearch
         access: proxy
+        editable: true
+        esVersion: 60
+        timeField: "@timestamp"
         url: http://elasticsearch:9200
   dashboards.yaml: |
     apiVersion: 1
@@ -34,3 +37,19 @@ data:
       editable: true
       options:
         path: /var/lib/grafana/dashboards/applications
+  notifiers.yaml: |
+    apiVersion: 1
+    notifiers:
+    - name: o12stack-slack
+      type: slack
+      uid: slack
+      org_id: 1
+      is_default: true
+      send_reminder: false
+      frequency: 1h
+      disable_resolve_message: false
+      settings:
+        username: grafana-${HOSTNAME}
+        recipient: "#test"
+        iconEmoji: ":rocket:s"
+        url: https://hooks.slack.com/services/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

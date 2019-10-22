@@ -73,6 +73,8 @@ spec:
               path: datasources/datasources.yaml
             - key: dashboards.yaml
               path: dashboards/dashboards.yaml
+            - key: notifiers.yaml
+              path: notifiers/notifiers.yaml
       - name: grafana-dashboards
         emptyDir: {}
 
