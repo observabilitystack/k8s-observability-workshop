@@ -9,6 +9,7 @@ export HOSTNAME="${HOSTNAME:=local}"
 export DOMAIN_NAME="${DOMAIN_NAME:=k8s.o12stack.org}"
 export CONF_SHA=$(shasum ${application}-configuration.yml | awk '{print $1}')
 export ENV_SHA=$(shasum ${application}-environment.yml | awk '{print $1}')
+export DOLLAR='$'
 
 echo "🚀  ${application} ${GRAFANA_VERSION}"
 envsubst <${application}-configuration.yml | kubectl apply -n monitoring  -f -
