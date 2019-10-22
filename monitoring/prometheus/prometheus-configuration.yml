@@ -22,12 +22,6 @@ data:
           - targets:
             - localhost:8080
 
-      # scrape node metrics
-      - job_name: 'node'
-        static_configs:
-          - targets:
-            - ${HOSTNAME}.${DOMAIN_NAME}:9090
-
       # scrape traefik api, which is deployed with the 
       # 'traefik-web-ui'. Use the web endpoint
       - job_name: 'traefik'
