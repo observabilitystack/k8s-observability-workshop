@@ -31,8 +31,11 @@ data:
     mkdir -p /var/lib/grafana/dashboards/kubernetes &&
     mkdir -p /var/lib/grafana/dashboards/applications &&
     wget -O /var/lib/grafana/dashboards/kubernetes/4475.json https://grafana.com/api/dashboards/4475/revisions/4/download &&
+    sed -i 's/${DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/4475.json &&
     wget -O /var/lib/grafana/dashboards/kubernetes/10645.json https://grafana.com/api/dashboards/10645/revisions/1/download &&
+    sed -i 's/${DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/10645.json &&
     wget -O /var/lib/grafana/dashboards/kubernetes/2525.json https://grafana.com/api/dashboards/2525/revisions/1/download &&
+    sed -i 's/${DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/2525.json &&
     wget -O /var/lib/grafana/dashboards/kubernetes/6787.json https://grafana.com/api/dashboards/6787/revisions/1/download &&
-    wget -O /var/lib/grafana/dashboards/applications/o12stack.json https://raw.githubusercontent.com/observabilitystack/o12stack-test-center/master/local-demo/grafana/dashboards/o12stack-test-center.json &&
-    sed -i 's/${DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/*.json
+    sed -i 's/${DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/6787.json &&
+    wget -O /var/lib/grafana/dashboards/applications/o12stack.json https://raw.githubusercontent.com/observabilitystack/o12stack-test-center/master/local-demo/grafana/dashboards/o12stack-test-center.json
