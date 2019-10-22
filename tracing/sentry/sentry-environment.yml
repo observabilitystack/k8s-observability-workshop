@@ -13,3 +13,4 @@ data:
   SENTRY_DB_NAME: sentry
   SENTRY_DB_PASSWORD: "9vyHf84QU9L1o"
   SENTRY_REDIS_HOST: sentry-infrastructure
+  C_FORCE_ROOT: "true"
