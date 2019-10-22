@@ -69,7 +69,7 @@ spec:
         configMap:
           name: grafana-configuration
           items:
-            - key: prometheus.yaml
+            - key: datasources.yaml
               path: datasources/datasources.yaml
             - key: dashboards.yaml
               path: dashboards/dashboards.yaml
