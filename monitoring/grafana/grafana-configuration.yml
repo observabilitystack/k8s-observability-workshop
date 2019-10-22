@@ -13,6 +13,7 @@ data:
       - name: prometheus
         type: prometheus
         access: proxy
+        isDefault: true
         url: http://prometheus:9090
   dashboards.yaml: |
     apiVersion: 1
