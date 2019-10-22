@@ -23,7 +23,10 @@ spec:
       initContainers:
         - name: grafana-dashboard-download
           image: busybox
-          command: ['sh', '-c', 'wget -O /var/lib/grafana/dashboards/traefik.json https://grafana.com/api/dashboards/4475/revisions/4/download']
+          command: ['sh', '-c', '$(DOWNLOAD_DASHBOARDS)']
+          envFrom:
+          - configMapRef:
+              name: grafana-environment
           volumeMounts:
           - name: grafana-dashboards
             mountPath: /var/lib/grafana/dashboards

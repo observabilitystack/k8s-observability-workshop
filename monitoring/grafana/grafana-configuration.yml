@@ -17,33 +17,15 @@ data:
   dashboards.yaml: |
     apiVersion: 1
     providers:
-    - name: 'Traefik'
+    - name: 'Kubernetes'
       folder: 'Kubernetes'
       type: file
+      editable: false
       options:
-        path: /var/lib/grafana/dashboards/4475.json
-        url: https://grafana.com/api/dashboards/4475/revisions/4/download
-    - name: 'Node Exporter'
-      folder: 'Kubernetes'
-      type: file
-      options:
-        path: /var/lib/grafana/dashboards/10645.json
-        url: https://grafana.com/api/dashboards/10645/revisions/1/download
-    - name: 'Logstash'
-      folder: 'Kubernetes'
-      type: file
-      options:
-        path: /var/lib/grafana/dashboards/2525.json
-        url: https://grafana.com/api/dashboards/2525/revisions/1/download
-    - name: 'Graylog'
-      folder: 'Kubernetes'
-      type: file
-      options:
-        path: /var/lib/grafana/dashboards/6787.json
-        url: https://grafana.com/api/dashboards/6787/revisions/1/download
-    - name: 'o12stack Test Center'
+        path: /var/lib/grafana/dashboards/kubernetes
+    - name: 'Applications'
       folder: 'Applications'
       type: file
+      editable: true
       options:
-        path: /var/lib/grafana/dashboards/o12stack.json
-        url: https://raw.githubusercontent.com/observabilitystack/o12stack-test-center/master/local-demo/grafana/dashboards/o12stack-test-center.json
+        path: /var/lib/grafana/dashboards/applications
