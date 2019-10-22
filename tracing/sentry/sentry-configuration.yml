@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sentry-configuration
+  labels:
+    application: sentry
+    component: monitoring
+data:
+  config.yml: |
+    auth.allow-registration: false
+    beacon.anonymous: true
+    system.admin-email: "admin@${HOSTNAME}.${DOMAIN_NAME}"
+    system.url-prefix: "https://sentry.${HOSTNAME}.${DOMAIN_NAME}/"

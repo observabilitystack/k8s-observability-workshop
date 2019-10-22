@@ -8,8 +8,6 @@ metadata:
     component: monitoring
 data:
   SENTRY_SECRET_KEY: "ssyrwhcxed+!kr6w&q=8f(pb*q^+a=gz+o2c+u%dncpdbih@ih"
-  SENTRY_URL_PREFIX: "https://sentry.${HOSTNAME}.${DOMAIN_NAME}"
-  SENTRY_ADMIN_EMAIL: "admin@${HOSTNAME}.${DOMAIN_NAME}"
   SENTRY_POSTGRES_HOST: sentry-infrastructure
   SENTRY_DB_USER: sentry
   SENTRY_DB_NAME: sentry

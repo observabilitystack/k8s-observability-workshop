@@ -17,33 +17,11 @@ spec:
         application: sentry
       annotations:
         checksum/environment: ${ENV_SHA}
+        checksum/configuration: ${CONF_SHA}
     spec:
-      initContainers:
-      - name: sentry-upgrade
-        image: sentry:9
-        command:
-          - sentry
-          - upgrade
-          - --noinput
-        envFrom:
-        - configMapRef:
-            name: sentry-environment
-      - name: sentry-create-admin-user
-        image: sentry:9
-        command:
-          - sentry
-          - createuser 
-          - --email 
-          - admin@${HOSTNAME}.${DOMAIN_NAME}
-          - --password 
-          - o12stack 
-          - --superuser 
-          - --no-input
-        envFrom:
-        - configMapRef:
-            name: sentry-environment
-
       containers:
+
+        # web ui
       - name: sentry
         image: sentry:9
         command:
@@ -60,6 +38,11 @@ spec:
         envFrom:
         - configMapRef:
             name: sentry-environment
+        volumeMounts:
+        - name: sentry-configuration
+          mountPath: /etc/sentry/
+
+        # cron
       - name: sentry-cron
         image: sentry:9
         command:
@@ -76,6 +59,11 @@ spec:
         envFrom:
         - configMapRef:
             name: sentry-environment
+        volumeMounts:
+        - name: sentry-configuration
+          mountPath: /etc/sentry/
+
+        # worker
       - name: sentry-worker
         image: sentry:9
         command:
@@ -92,3 +80,14 @@ spec:
         envFrom:
         - configMapRef:
             name: sentry-environment
+        volumeMounts:
+        - name: sentry-configuration
+          mountPath: /etc/sentry/
+
+      volumes:
+      - name: sentry-configuration
+        configMap:
+          name: sentry-configuration
+          items:
+            - key: config.yml
+              path: config.yml

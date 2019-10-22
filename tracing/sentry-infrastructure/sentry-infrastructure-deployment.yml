@@ -15,7 +15,38 @@ spec:
       labels:
         name: sentry-infrastructure
         application: sentry-infrastructure
+      annotations:
+        checksum/environment: ${ENV_SHA}
     spec:
+      initContainers:
+        
+        # create db schema on fresh infrastructure only
+      - name: sentry-upgrade
+        image: sentry:9
+        command:
+          - sentry
+          - upgrade
+          - --noinput
+        envFrom:
+        - configMapRef:
+            name: sentry-environment
+
+        # create first admin user
+      - name: sentry-create-admin-user
+        image: sentry:9
+        command:
+          - sentry
+          - createuser 
+          - --email 
+          - admin@${HOSTNAME}.${DOMAIN_NAME}
+          - --password 
+          - o12stack 
+          - --superuser 
+          - --no-input
+        envFrom:
+        - configMapRef:
+            name: sentry-environment
+            
       containers:
 
         # redis 
