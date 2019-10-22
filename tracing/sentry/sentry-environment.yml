@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sentry-environment
+  labels:
+    application: sentry
+    component: monitoring
+data:
+  SENTRY_SECRET_KEY: "ssyrwhcxed+!kr6w&q=8f(pb*q^+a=gz+o2c+u%dncpdbih@ih"
+  SENTRY_POSTGRES_HOST: sentry-infrastructure
+  SENTRY_DB_PASSWORD: "9vyHf84QU9L1o"
+  SENTRY_REDIS_HOST: sentry-infrastructure

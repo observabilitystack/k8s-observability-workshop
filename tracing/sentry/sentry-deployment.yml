@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentry
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      name: sentry
+      application: sentry
+  template:
+    metadata:
+      labels:
+        name: sentry
+        application: sentry
+    spec:
+      initContainers:
+      - name: sentry-upgrade
+        image: sentry:9
+        command:
+          - sentry
+          - upgrade
+          - --noinput
+        envFrom:
+        - configMapRef:
+            name: sentry-environment
+
+      containers:
+      - name: sentry
+        image: sentry:9
+        command:
+          - sentry
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "2"
+            memory: "800Mi"
+        envFrom:
+        - configMapRef:
+            name: sentry-environment
+      - name: sentry-cron
+        image: sentry:9
+        command:
+          - sentry
+          - cron
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "1"
+            memory: "400Mi"
+        envFrom:
+        - configMapRef:
+            name: sentry-environment
+      - name: sentry-worker
+        image: sentry:9
+        command:
+          - sentry
+          - worker
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "2"
+            memory: "800Mi"
+        envFrom:
+        - configMapRef:
+            name: sentry-environment

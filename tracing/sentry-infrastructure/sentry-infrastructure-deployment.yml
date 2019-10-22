@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentry-infrastructure
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      name: sentry-infrastructure
+      application: sentry-infrastructure
+  template:
+    metadata:
+      labels:
+        name: sentry-infrastructure
+        application: sentry-infrastructure
+    spec:
+      containers:
+
+        # redis 
+      - name: redis
+        image: redis:5
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "64Mi"
+          limits:
+            cpu: "1"
+            memory: "256Mi"
+      
+        # postgres
+      - name: postgres
+        image: postgres:12
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "2"
+            memory: "800Mi"
+        environment:
+          - name: POSTGRES_PASSWORD
+            value: "9vyHf84QU9L1o"
+          - name: POSTGRES_USER
+            value: "sentry"
