@@ -39,7 +39,7 @@ spec:
           limits:
             cpu: "2"
             memory: "800Mi"
-        environment:
+        env:
           - name: POSTGRES_PASSWORD
             value: "9vyHf84QU9L1o"
           - name: POSTGRES_USER
