@@ -44,3 +44,5 @@ spec:
             value: "9vyHf84QU9L1o"
           - name: POSTGRES_USER
             value: "sentry"
+          - name: POSTGRES_DB
+            value: "sentry"
