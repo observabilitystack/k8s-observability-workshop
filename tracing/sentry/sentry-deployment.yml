@@ -28,6 +28,20 @@ spec:
         envFrom:
         - configMapRef:
             name: sentry-environment
+      - name: sentry-create-admin-user
+        image: sentry:9
+        command:
+          - sentry
+          - createuser 
+          - --email 
+          - $(SENTRY_ADMIN_EMAIL)
+          - --password 
+          - o12stack 
+          - --superuser 
+          - --no-input
+        envFrom:
+        - configMapRef:
+            name: sentry-environment
 
       containers:
       - name: sentry
