@@ -34,7 +34,7 @@ spec:
           - sentry
           - createuser 
           - --email 
-          - $(SENTRY_ADMIN_EMAIL)
+          - admin@${HOSTNAME}.${DOMAIN_NAME}
           - --password 
           - o12stack 
           - --superuser 
