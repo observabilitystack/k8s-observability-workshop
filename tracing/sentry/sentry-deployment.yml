@@ -61,7 +61,9 @@ spec:
             name: sentry-environment
         volumeMounts:
         - name: sentry-configuration
-          mountPath: /etc/sentry/
+          mountPath: /etc/sentry/config.yml
+          readOnly: true
+          subPath: config.yml
 
         # cron
       - name: sentry-cron
@@ -82,7 +84,9 @@ spec:
             name: sentry-environment
         volumeMounts:
         - name: sentry-configuration
-          mountPath: /etc/sentry/
+          mountPath: /etc/sentry/config.yml
+          readOnly: true
+          subPath: config.yml
 
         # worker
       - name: sentry-worker
@@ -103,12 +107,11 @@ spec:
             name: sentry-environment
         volumeMounts:
         - name: sentry-configuration
-          mountPath: /etc/sentry/
+          mountPath: /etc/sentry/config.yml
+          readOnly: true
+          subPath: config.yml
 
       volumes:
       - name: sentry-configuration
         configMap:
           name: sentry-configuration
-          items:
-            - key: config.yml
-              path: config.yml
