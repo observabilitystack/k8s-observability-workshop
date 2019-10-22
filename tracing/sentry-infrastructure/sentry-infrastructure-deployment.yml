@@ -15,8 +15,6 @@ spec:
       labels:
         name: sentry-infrastructure
         application: sentry-infrastructure
-      annotations:
-        checksum/environment: ${ENV_SHA}
     spec:
       containers:
 
