@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sentry
+  name: elastic-apm
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      name: sentry
-      application: sentry
+      name: elastic-apm
+      application: elastic-apm
   template:
     metadata:
       labels:
-        name: sentry
-        application: sentry
+        name: elastic-apm
+        application: elastic-apm
       annotations:
         checksum/configuration: ${CONF_SHA}
         prometheus.io/scrape: "true"
