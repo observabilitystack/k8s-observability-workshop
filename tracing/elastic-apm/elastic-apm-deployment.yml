@@ -16,7 +16,6 @@ spec:
         name: sentry
         application: sentry
       annotations:
-        checksum/environment: ${ENV_SHA}
         checksum/configuration: ${CONF_SHA}
         prometheus.io/scrape: "true"
         prometheus.io/port: "9108"
