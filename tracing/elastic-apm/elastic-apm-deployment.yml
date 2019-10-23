@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentry
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      name: sentry
+      application: sentry
+  template:
+    metadata:
+      labels:
+        name: sentry
+        application: sentry
+      annotations:
+        checksum/environment: ${ENV_SHA}
+        checksum/configuration: ${CONF_SHA}
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9108"
+    spec:
+      initContainers:
+      - name: "sysctl"
+        image: busybox
+        command: ["sysctl", "-w", "vm.max_map_count=262144"]
+        securityContext:
+          privileged: true
+
+      containers:
+        - name: elasticsearch
+          image: docker.elastic.co/elasticsearch/elasticsearch-oss:${ELASTIC_VERSION}
+          env:
+            - name: ES_HTTP_CORS_ALLOW-ORIGIN
+              value: "*"
+            - name: discovery.type
+              value: single-node
+            - name: cluster.name
+              value: o12stack-apm
+
+        - name: kibana
+          image: docker.elastic.co/kibana/kibana-oss:${ELASTIC_VERSION}
+          env:
+            - name: SERVER_NAME
+              value: apm.${HOSTNAME}.${DOMAIN_NAME}
+            - name: ELASTICSEARCH_HOSTS
+              value: http://localhost:9200
+
+        - name: apm-server
+          image: docker.elastic.co/apm/apm-server-oss:${ELASTIC_VERSION}
+          volumeMounts:
+          - name: elastic-apm-configuration
+            mountPath: /usr/share/apm-server/apm-server.yml
+            readOnly: true
+            subPath: apm-server.yml
+
+        - name: elasticsearch-exporter
+          image: justwatch/elasticsearch_exporter:1.0.2
+          args:
+            - "-es.all"
+            - "-es.indices"
+            - "-es.uri=http://localhost:9200"
+
+      volumes:
+      - name: elastic-apm-configuration
+        configMap:
+          name: elastic-apm-configuration

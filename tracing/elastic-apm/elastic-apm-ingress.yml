@@ -1,0 +1,15 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    application: elastic-apm
+  name: elastic-apm
+spec:
+  rules:
+  - host: apm.${HOSTNAME}.${DOMAIN_NAME}
+    http:
+      paths:
+      - backend:
+          serviceName: elastic-apm
+          servicePort: web

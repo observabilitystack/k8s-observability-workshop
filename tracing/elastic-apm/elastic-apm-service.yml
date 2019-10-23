@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elastic-apm
+spec:
+  ports:
+  - name: web
+    port: 5601
+    protocol: TCP
+  - name: agent
+    port: 8200
+    protocol: TCP
+  selector:
+    application: elastic-apm
