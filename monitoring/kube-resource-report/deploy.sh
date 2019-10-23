@@ -4,7 +4,7 @@ cd $(dirname "$0")
 set -e
 
 application=$(basename $(pwd))
-export KUBE_RESOURCE_REPORT_VERSION=0.15
+export KUBE_RESOURCE_REPORT_VERSION=19.9.0
 export HOSTNAME="${HOSTNAME:=local}"
 export DOMAIN_NAME="${DOMAIN_NAME:=k8s.o12stack.org}"
 
