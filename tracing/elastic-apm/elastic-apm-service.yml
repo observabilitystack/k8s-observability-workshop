@@ -12,4 +12,4 @@ spec:
     port: 8200
     protocol: TCP
   selector:
-    application: elastic-apm
+    name: elastic-apm
