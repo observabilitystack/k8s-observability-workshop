@@ -28,6 +28,10 @@ spec:
         env:
         - name: SENTRY_DSN
           value: ""
+        - name: ELASTIC_APM_SERVER_URL
+          value: "http://elastic-apm.tracing.svc.cluster.local:8200"
+        - name: ELASTIC_APM_SECRET_TOKEN
+          value: ""
         resources:
           requests:
             cpu: "100m"
