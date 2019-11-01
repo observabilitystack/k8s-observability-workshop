@@ -38,8 +38,12 @@ data:
     sed -i 's/${DOLLAR}{DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/2525.json &&
     wget -O /var/lib/grafana/dashboards/kubernetes/6787.json https://grafana.com/api/dashboards/6787/revisions/1/download &&
     sed -i 's/${DOLLAR}{DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/6787.json &&
-    wget -O /var/lib/grafana/dashboards/kubernetes/8919.json https://grafana.com/api/dashboards/8919/revisions/10/download &&
-    sed -i 's/${DOLLAR}{DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/8919.json &&
+    wget -O /var/lib/grafana/dashboards/kubernetes/3131.json https://grafana.com/api/dashboards/3131/revisions/1/download &&
+    sed -i 's/${DOLLAR}{DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/3131.json &&
+    wget -O /var/lib/grafana/dashboards/kubernetes/6417.json https://grafana.com/api/dashboards/6417/revisions/1/download &&
+    sed -i 's/${DOLLAR}{DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/6417.json &&
+    wget -O /var/lib/grafana/dashboards/kubernetes/1860.json https://grafana.com/api/dashboards/1860/revisions/15/download &&
+    sed -i 's/${DOLLAR}{DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/1860.json &&
     wget -O /var/lib/grafana/dashboards/kubernetes/10645.json https://grafana.com/api/dashboards/10645/revisions/1/download &&
     sed -i 's/${DOLLAR}{DS_PROMETHEUS}/prometheus/g' /var/lib/grafana/dashboards/kubernetes/10645.json &&
     wget -O /var/lib/grafana/dashboards/kubernetes/1471.json https://grafana.com/api/dashboards/1471/revisions/1/download &&
