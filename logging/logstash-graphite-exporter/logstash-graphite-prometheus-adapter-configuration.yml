@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-graphite-exporter-configuration
+data:
+  graphite-mapping.yaml: |-
+    mappings:
+    - match: http_requests_css_total.*.count
+      name: http_requests_css_total
+      labels:
+        code: $1
+#  logstash.conf: |-    
+#    filter {
+#     if ".css" in [request] {
+#        metrics {
+#          meter => [
+#              'http_requests_css_total.%{response}' 
+#          ]
+#          rates => []
+#          add_tag => "metric"
+#          flush_interval => 30
+#          ignore_older_than => 120
+#        }
+#      }
+#    }
+#    
+#    output {
+#      if "metric" in [tags] {
+#        stdout{}
+#        graphite {
+#            host => "logstash-graphite-exporter"
+#            port => 9109
+#            fields_are_metrics => true
+#        }
+#      } else {
+#        gelf {
+#              host => "graylog"
+#              port => "12201"
+#              sender => "%{[kubernetes][pod]}"
+#              protocol => "TCP"
+#        }
+#      }
+#    }

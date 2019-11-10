@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: c
+spec:
+  ports:
+  - name: graphite
+    port: 9109
+    
+  selector:
+    name: logstash-graphite-exporter
