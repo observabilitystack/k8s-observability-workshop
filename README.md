@@ -4,8 +4,11 @@ These are the resources for the observability workshop provided by [Torsten](htt
 
 ## Our next appearances
 
-* [WJAX 2019 in Munich](https://jax.de/cloud-container-serverless/workshop-observability-log-management-fuer-container-umgebungen/) Nov 8th, 2019
 * [DevOpsCon 2019 in Munich](https://devopsconference.de/monitoring-traceability-diagnostics/monitoring-workshop-open-source-observability-and-log-management-in-container-environments/) Dec 2nd, 2019 (**SOLD OUT**)
+
+## Previous appearances
+
+* [WJAX 2019 in Munich](https://jax.de/cloud-container-serverless/workshop-observability-log-management-fuer-container-umgebungen/) Nov 8th, 2019
 
 ## Information for our participants
 
