@@ -23,7 +23,7 @@ We use Slack to easily share stuff before and during our workshops. You're welco
 
 As we provide you with your own cloud-based Kubernetes infrastructure for the duration of the workshop, we have to make sure that only you and your fellow participants have access to it.
 
-* [Create an SSH key](https://help.github.com/en/enterprise/2.17/user/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) (or re-use an existing one)
+* [Create an SSH key](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) (or re-use an existing one) – maybe [use a more recent cipher like *Ed25519*](https://flyingcircus.io/doc/guide/users/ssh-keygen.html#generating-ssh-keys)
 * Send us the _public_ key in time before the workshop either via E-Mail to [Nikolaus](mailto:training@nikolauswinter.de) and/or [Torsten](mailto:tbk@thiswayup.de) or [Slack](https://o12stack.slack.com/). Make sure that the _private_ key is stored safely on the machine you bring to the workshop, ready to be used when needed to connect to the cluster.
 
 ### 4) Easy editing via SSH
