@@ -28,7 +28,7 @@ As we provide you with your own cloud-based Kubernetes infrastructure for the du
 
 ### 4) Easy editing via SSH
 
-For a smooth editing experience during the workshop, please install an editor that enables you to edit the files directly on a remote host. We recommend [Visual Studio Code](https://code.visualstudio.com/) with the [Remote-SSH](https://code.visualstudio.com/docs/remote/ssh) extension.
+For a smooth editing experience during the workshop, please install an editor that enables you to edit the files directly on a remote host. We recommend [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Questions?
 
