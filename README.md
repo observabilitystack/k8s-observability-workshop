@@ -17,7 +17,7 @@ To make the most of our day together, __please prepare yourself__:
 
 ### 2) Join our Slack 
 
-We use Slack to easily share stuff before and during our workshops. You're welcome to join, please use [this link](https://join.slack.com/t/o12stack/shared_invite/enQtODA0MzAzMjAwNzUyLTY1YTViZjVlZjY3ZjFkZTNlM2E1YWFiMTY4M2QwOTRhN2IyMjM3M2Q5MmYxMzUyMDk4ZGFkZmY1NzhlNmQ4ZDU).
+We use Slack to easily share stuff before and during our workshops. Please use [this link](https://join.slack.com/t/o12stack/shared_invite/enQtODA0MzAzMjAwNzUyLTY1YTViZjVlZjY3ZjFkZTNlM2E1YWFiMTY4M2QwOTRhN2IyMjM3M2Q5MmYxMzUyMDk4ZGFkZmY1NzhlNmQ4ZDU) to join.
 
 ### 3) Create an SSH Key
 
@@ -28,7 +28,7 @@ As we provide you with your own cloud-based Kubernetes infrastructure for the du
 
 ### 4) Easy editing via SSH
 
-For a smooth editing experience during the workshop, please install an editor that enables you to edit the files directly on a remote host. We recommend [Visual Studio Code](https://code.visualstudio.com/).
+For a smooth editing experience during the workshop, please *install an editor* that enables you to edit the files directly on a remote host. We recommend [Visual Studio Code](https://code.visualstudio.com/). If you like working in the Terminal, we have *vim*, *emacs*, *nano*, *joe* and what not pre-installed.
 
 ## Questions?
 
