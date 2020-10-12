@@ -1,9 +1,12 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: logstash-graphite-exporter
 spec:
+  selector:
+    matchLabels:
+      name: logstash-graphite-exporter
   template:
     metadata:
       labels:

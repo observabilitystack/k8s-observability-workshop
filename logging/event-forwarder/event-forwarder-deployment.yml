@@ -1,9 +1,12 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: event-forwarder
 spec:
+  selector:
+    matchLabels:
+      name: event-forwarder
   template:
     metadata:
       labels:
