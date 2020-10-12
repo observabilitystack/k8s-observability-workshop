@@ -1,9 +1,12 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: logstash
 spec:
+  selector:
+    matchLabels:
+      name: logstash
   template:
     metadata:
       labels:
@@ -16,6 +19,7 @@ spec:
       containers:
       - name: logstash
         image: observabilitystack/logstash:${LOGSTASH_VERSION}
+        imagePullPolicy: Always
         ports:
         - containerPort: 5044
         resources:
