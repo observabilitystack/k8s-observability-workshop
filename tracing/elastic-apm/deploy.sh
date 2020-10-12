@@ -4,7 +4,7 @@ cd $(dirname "$0")
 set -e
 
 application=$(basename $(pwd))
-export ELASTIC_VERSION=7.4.0
+export ELASTIC_VERSION=7.9.1
 export HOSTNAME="${HOSTNAME:=local}"
 export DOMAIN_NAME="${DOMAIN_NAME:=k8s.o12stack.org}"
 export CONF_SHA=$(shasum ${application}-configuration.yml | awk '{print $1}')
