@@ -1,5 +1,5 @@
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: elasticsearch
@@ -7,6 +7,9 @@ spec:
   replicas: 1
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+      name: elasticsearch
   template:
     metadata:
       labels:
@@ -68,7 +71,7 @@ spec:
               cpu: "250m"
               memory: "250Mi"
         - name: elasticsearch-elastichq
-          image: elastichq/elasticsearch-hq:release-v3.5.0
+          image: elastichq/elasticsearch-hq:release-v3.5.12
           env:
             - name: HQ_DEFAULT_URL
               value: http://localhost:9200
