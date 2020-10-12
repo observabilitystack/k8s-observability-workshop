@@ -1,5 +1,5 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   labels:
@@ -11,6 +11,10 @@ spec:
   - host: grafana.${HOSTNAME}.${DOMAIN_NAME}
     http:
       paths:
-      - backend:
-          serviceName: grafana
-          servicePort: web
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana
+            port: 
+              name: web

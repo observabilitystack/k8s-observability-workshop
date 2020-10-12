@@ -5,7 +5,7 @@ metadata:
   name: kube-resource-report
 ---
 kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: kube-resource-report
 rules:
@@ -30,7 +30,7 @@ rules:
     - get
 ---
 kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: kube-resource-report
 roleRef:
