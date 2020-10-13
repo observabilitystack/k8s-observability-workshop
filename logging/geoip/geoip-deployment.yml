@@ -33,3 +33,8 @@ spec:
             memory: "1Gi"
         ports:
         - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+            scheme: HTTP
