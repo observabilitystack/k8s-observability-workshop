@@ -1,5 +1,5 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: o12stack-test-center 
@@ -8,6 +8,10 @@ spec:
   - host: o12stack-test-center.${HOSTNAME}.${DOMAIN_NAME}
     http:
       paths:
-      - backend:
-          serviceName: o12stack-test-center
-          servicePort: web
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: o12stack-test-center
+            port: 
+              name: web
