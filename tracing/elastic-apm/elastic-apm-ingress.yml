@@ -1,5 +1,5 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   labels:
@@ -10,6 +10,10 @@ spec:
   - host: apm.${HOSTNAME}.${DOMAIN_NAME}
     http:
       paths:
-      - backend:
-          serviceName: elastic-apm
-          servicePort: web
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: elastic-apm
+            port: 
+              name: web

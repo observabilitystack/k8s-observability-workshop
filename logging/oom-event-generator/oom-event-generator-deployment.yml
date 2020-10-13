@@ -1,9 +1,12 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: oom-event-generator
 spec:
+  selector:
+    matchLabels:
+      name: oom-event-generator
   template:
     metadata:
       labels:

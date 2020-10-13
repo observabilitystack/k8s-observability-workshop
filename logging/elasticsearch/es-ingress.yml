@@ -1,5 +1,5 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: elasticsearch
@@ -8,12 +8,20 @@ spec:
     - host: elasticsearch.${HOSTNAME}.${DOMAIN_NAME}
       http:
         paths:
-          - backend:
-              serviceName: elasticsearch
-              servicePort: http
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: elasticsearch
+                port: 
+                  name: http
     - host: elastichq.${HOSTNAME}.${DOMAIN_NAME}
       http:
         paths:
-          - backend:
-              serviceName: elasticsearch
-              servicePort: elastichq
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: elasticsearch
+                port: 
+                  name: elastichq

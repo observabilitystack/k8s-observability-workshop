@@ -33,7 +33,8 @@ spec:
 
         # graylog
       - name: graylog
-        image: observabilitystack/graylog:3.0.2-2
+        image: observabilitystack/graylog:3.3.7
+        imagePullPolicy: Always
         env:
         - name: GRAYLOG_PASSWORD_SECRET
           value: 69EBaFSDEJUjOdtQPTimjqhfgwZ46133aPCEzrXYralnWgBRVt1pdIq4tNCUZaE03xZaQFgyYpqUj5nTUInsGfwiu3y5NYtf
@@ -74,13 +75,17 @@ spec:
             path: /system/lbstatus
             port: 9000
             scheme: HTTP
-          initialDelaySeconds: 600
+          initialDelaySeconds: 60
+          failureThreshold: 20
+          periodSeconds: 3
         readinessProbe:
           httpGet:
             path: /system/lbstatus
             port: 9000
             scheme: HTTP
-          initialDelaySeconds: 120
+          initialDelaySeconds: 60
+          failureThreshold: 20
+          periodSeconds: 3
         resources:
           requests:
             cpu: "500m"

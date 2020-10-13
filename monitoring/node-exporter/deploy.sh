@@ -3,7 +3,7 @@
 cd $(dirname "$0")
 set -e
 
-export NODE_EXPORTER_VERSION=v0.18.1
+export NODE_EXPORTER_VERSION=v1.0.1
 application=$(basename $(pwd))
 
 echo "🚀  ${application} ${NODE_EXPORTER_VERSION}"
