@@ -23,14 +23,14 @@ data:
             - localhost:8080
 
       # scrape traefik api, which is deployed with the 
-      # 'traefik-web-ui'. Use the web endpoint
+      # 'traefik'. Use the web endpoint
       - job_name: 'traefik'
         kubernetes_sd_configs:
         - role: endpoints
         relabel_configs:
         - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
           action: keep
-          regex: kube-system;traefik-web-ui;web
+          regex: kube-system;traefik;admin
 
       # monitor running pods ...
       - job_name: kubernetes-pods
